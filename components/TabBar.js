@@ -92,8 +92,8 @@ function TabBar() {
           }}
         />
         <Tab.Screen
-          name="ToDo"
-          children={() => <ToDoScreen toDoList={toDoList}/>}
+          name="To Do"
+          children={() => <GoalStackNavigator toDoList={toDoList} />}
           options={{
             tabBarLabel: "To Do",
             tabBarIcon: ({ color, size }) => (
@@ -150,7 +150,10 @@ function TabBar() {
             },
           }}
         />
-        <Tab.Screen name="GoalDetails" children={() => <GoalDetailsScreen goal={goal}/>} initialParams={toDoList.length > 1 ? toDoList[0] : {}}
+        <Tab.Screen
+          name="GoalDetails"
+          children={() => <GoalDetailsScreen goal={goal} />}
+          initialParams={toDoList.length > 1 ? toDoList[0] : {}}
           options={{
             tabBarButton: () => null,
             tabBarStyle: {
@@ -167,7 +170,8 @@ function TabBar() {
               lineHeight: 28,
               color: "#FCFCFC",
             },
-          }}/>
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );

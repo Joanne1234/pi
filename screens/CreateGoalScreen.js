@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
+import InfoList from "../components/InfoList";
 
 function CreateGoalScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Goal Title</Text>
+      <InfoList expanded={true} toDoList={toDoList || []} />
     </View>
   );
 }
