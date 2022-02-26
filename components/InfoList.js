@@ -41,7 +41,7 @@ function InfoList({ toDoList, expanded, onGoalClick }) {
 const styles = StyleSheet.create({
   container: {
     //flex: 1,
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
   },
   heading: {
     fontFamily: "Poppins_700Bold",

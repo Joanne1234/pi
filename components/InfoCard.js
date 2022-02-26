@@ -23,16 +23,20 @@ const getPercentageTasksCompleted = (goal) => {
   return percentage;
 };
 
-function InfoCardSimple({ task }) {
+function InfoCardSimple({ goal }) {
+  const completedTaskAmount = getNumberOfTasksCompleted(goal);
   const navigation = useNavigation()
   const onClick = () => {
-    navigation.navigate("Goal Details", task)
+    console.log("onclick info card simple")
+    navigation.navigate("GoalDetails", { goal: goal })
   }
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onClick}>
-        <Text style={styles.heading}>{task?.title || "InfoCard"}</Text>
-        <Text style={styles.subheading}>{task?.completedTasks || 0} / {task?.totalTasks || 6} Tasks completed</Text>
+        <Text style={styles.heading}>{goal.title}</Text>
+        <Text style={styles.subheading}>
+          {completedTaskAmount}/{goal.tasks.length} Tasks completed
+       </Text>
       </TouchableOpacity>
     </View>
   );
@@ -43,7 +47,11 @@ function InfoCardExpanded({ goal }) {
   const percentageTasksCompleted = getPercentageTasksCompleted(goal);
   const navigation = useNavigation()
   const onClick = () => {
-    navigation.navigate("Goal Details", task)
+    console.log(goal)
+    navigation.navigate("ToDo", {
+      screen: "GoalDetails", 
+      params: { goal: goal }
+    })
   }
   return (
     <View style={styles.container}>
@@ -58,15 +66,21 @@ function InfoCardExpanded({ goal }) {
         height={12}
         style={styles.bar}
       />
-      <View style={styles.line}>
-        <Text style={styles.percentage}>
-          {Math.round(percentageTasksCompleted * 100)}%{" "}
-        </Text>
-        <Text style={styles.text}>Complete</Text>
-      </View>
+      <PercentageCompleteText goal={goal}/>
       </TouchableOpacity>
     </View>
   );
+}
+
+function PercentageCompleteText({ goal }) {
+  return (
+    <View style={styles.line}>
+      <Text style={styles.percentage}>
+        {Math.round(getPercentageTasksCompleted(goal) * 100)}%{" "}
+      </Text>
+      <Text style={styles.text}>Complete</Text>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -116,4 +130,4 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 });
-export { InfoCardSimple, InfoCardExpanded };
+export { InfoCardSimple, InfoCardExpanded, PercentageCompleteText, getNextTaskInGoal, getNumberOfTasksCompleted, getPercentageTasksCompleted };

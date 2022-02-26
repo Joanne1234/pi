@@ -20,7 +20,7 @@ function ToDoScreen() {
     <View style={styles.container}>
       <Text style={styles.heading}>To Do List</Text>
       <InfoList expanded={false} toDoList={todoList || []} />
-      <CreateGoalButton style={styles.button}/>
+      <CreateGoalButton style={styles.button} />
     </View>
   );
 }
