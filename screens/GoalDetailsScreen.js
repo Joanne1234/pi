@@ -6,9 +6,19 @@ import { PercentageCompleteText } from "../components/InfoCard";
 import { ProgressList, CheckBoxItem } from "../components/ProgressList";
 import { getGoal } from "../lib/goals-helper";
 
+// get amount of days till date
+const getDaysTillDate = (dateString) => {
+  const today = new Date();
+  const date = new Date(dateString);
+  const timeDiff = Math.abs(date.getTime() - today.getTime());
+  const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
+  return diffDays;
+};
+
 const GoalDetailsScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
+  const [taskValue, setTaskValue] = useState("");
   const [change, setChange] = useState(0);
 
   const [goal, setGoal] = useState({});
@@ -24,13 +34,26 @@ const GoalDetailsScreen = () => {
     fetchGoal();
   }, [route.params.goalId]);
 
+  const Days = () => {
+    const daysLeft = getDaysTillDate(goal.targetDate);
+    return (
+      <Text style={styles.text}>
+        {daysLeft > 0
+          ? `${daysLeft} Days`
+          : daysLeft === 0
+          ? "Today"
+          : "Overdue"}
+      </Text>
+    );
+  };
+
   return (
     <View style={styles.container}>
       {Object.keys(goal).length > 0 && (
         <>
           <View style={styles.status}>
             <PercentageCompleteText style={styles.percentage} goal={goal} />
-            <Text style={styles.text}>days</Text>
+            {goal?.targetDate && <Days />}
           </View>
           <ProgressList
             tasks={goal.tasks}
@@ -47,10 +70,10 @@ const GoalDetailsScreen = () => {
             <View style={styles.inputContainer}>
               <InputCard
                 onChange={(val) => {
-                  // setTaskValue(val);
+                  setTaskValue(val);
                 }}
                 placeholder="Task title"
-                value={/*taskValue*/ ""}
+                value={taskValue}
               />
             </View>
           </View>
@@ -106,7 +129,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignSelf: "stretch",
     marginHorizontal: 20,
-    paddingVertical: 10,
+    paddingTop: 25,
+    paddingBottom: 5,
   },
   percentage: {
     alignSelf: "center",
