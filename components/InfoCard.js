@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import * as Progress from "expo-progress";
+import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const getNextTaskInGoal = (goal) => {
   const tasks = goal.tasks;
@@ -21,15 +23,17 @@ const getPercentageTasksCompleted = (goal) => {
   return percentage;
 };
 
-function InfoCardSimple({ goal }) {
-  const completedTaskAmount = getNumberOfTasksCompleted(goal);
-
+function InfoCardSimple({ task }) {
+  const navigation = useNavigation()
+  const onClick = () => {
+    navigation.navigate("Goal Details", task)
+  }
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>{goal.title}</Text>
-      <Text style={styles.subheading}>
-        {completedTaskAmount}/{goal.tasks.length} Tasks completed
-      </Text>
+      <TouchableOpacity onPress={onClick}>
+        <Text style={styles.heading}>{task?.title || "InfoCard"}</Text>
+        <Text style={styles.subheading}>{task?.completedTasks || 0} / {task?.totalTasks || 6} Tasks completed</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -37,9 +41,13 @@ function InfoCardSimple({ goal }) {
 function InfoCardExpanded({ goal }) {
   const nextTask = getNextTaskInGoal(goal);
   const percentageTasksCompleted = getPercentageTasksCompleted(goal);
-
+  const navigation = useNavigation()
+  const onClick = () => {
+    navigation.navigate("Goal Details", task)
+  }
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={onClick}>
       <Text style={styles.heading}>{goal.title}</Text>
       {nextTask && <Text style={styles.subheading}>{nextTask.title}</Text>}
       <Progress.Bar
@@ -56,6 +64,7 @@ function InfoCardExpanded({ goal }) {
         </Text>
         <Text style={styles.text}>Complete</Text>
       </View>
+      </TouchableOpacity>
     </View>
   );
 }
