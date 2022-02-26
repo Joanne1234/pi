@@ -1,20 +1,27 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-//import { RoundedCheckbox } from "react-native-rounded-checkbox";
+import { RoundedCheckbox } from "react-native-rounded-checkbox";
 import { useEffect, useState } from "react";
-import Checkbox from 'expo-checkbox';
+//import Checkbox from 'expo-checkbox';
 function ProgressList({ tasks, completed, setChange }) {
-  console.log(tasks, completed)
+  console.log(tasks, completed);
   var displayList = tasks.filter(function (task) {
-    return task.completed == completed
-  })
-  console.log(displayList)
-  const renderItem = (item) => (<CheckBoxItem task={item.item} setChange={setChange}/>)
+    return task.completed == completed;
+  });
+  console.log(displayList);
+  const renderItem = (item) => (
+    <CheckBoxItem task={item.item} setChange={setChange} />
+  );
   if (!displayList || displayList.length == 0) {
-    return null
+    return null;
   }
   return (
-    <View style={[styles.container, {backgroundColor: completed ? "#EAF9DE" : "#FFFFFF"}]}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: completed ? "#EAF9DE" : "#FFFFFF" },
+      ]}
+    >
       <FlatList
         data={displayList}
         renderItem={renderItem}
@@ -24,10 +31,24 @@ function ProgressList({ tasks, completed, setChange }) {
     </View>
   );
 }
-/*<RoundedCheckbox 
+
+function CheckBoxItem({ task, setChange }) {
+  const [completed, setCompleted] = useState(task.completed);
+  useEffect(() => {
+    console.log(task.title, " Completed ", completed);
+  }, [completed]);
+  return (
+    <View
+      style={[
+        styles.cardContainer,
+        { backgroundColor: completed ? "#EAF9DE" : "#FFFFFF" },
+      ]}
+    >
+      <View style={styles.checkBox}>
+        <RoundedCheckbox
           onPress={(checked) => {
-            setCompleted(checked)
-            setChange(Math.random().toString(36))
+            setCompleted(checked);
+            setChange(Math.random().toString(36));
             // update async storage
           }}
           checkedColor="#008A00"
@@ -37,38 +58,31 @@ function ProgressList({ tasks, completed, setChange }) {
           text="✓"
           textStyle={styles.check}
           isChecked={task.completed}
-          outerStyle />*/
-function CheckBoxItem({ task, setChange }) {
-  const [completed, setCompleted] = useState(task.completed)
-  useEffect(() => {
-    console.log(task.title, " Completed ", completed)
-
-  }, [completed])
-  return (
-    <View style={[styles.cardContainer, {backgroundColor: completed ? "#EAF9DE" : "#FFFFFF"}]}>
-      <View style={styles.checkBox}>
-        <Checkbox
-            style={styles.check}
-            value={completed}
-            onValueChange={setCompleted}
-            color={completed ? "#008A00" : "#D9DBE9"}
-          />
+          outerStyle
+        />
       </View>
-      <Text style={[styles.text, {
-        color: completed ? "#008A00" : "#4E4B66", 
-        textDecorationLine: completed ? "line-through" : "none"
-      }]}>{task.title}</Text>
+      <Text
+        style={[
+          styles.text,
+          {
+            color: completed ? "#008A00" : "#4E4B66",
+            textDecorationLine: completed ? "line-through" : "none",
+          },
+        ]}
+      >
+        {task.title}
+      </Text>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
     margin: 10,
     borderRadius: 24,
     marginBottom: 20,
-    padding: 10
+    padding: 10,
   },
   heading: {
     fontFamily: "Poppins_700Bold",
@@ -92,8 +106,8 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_400Regular",
     fontSize: 17,
     lineHeight: 28,
-    alignSelf: 'center',
-    paddingHorizontal: 10
+    alignSelf: "center",
+    paddingHorizontal: 10,
   },
   percentage: {
     fontFamily: "Poppins_600SemiBold",
@@ -105,14 +119,14 @@ const styles = StyleSheet.create({
   cardContainer: {
     flexDirection: "row",
     alignSelf: "stretch",
-    paddingVertical: 10
+    paddingVertical: 10,
   },
   check: {
-    alignSelf: "center"
-  }, 
+    alignSelf: "center",
+  },
   checkBox: {
     paddingHorizontal: 10,
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });
-export {ProgressList, CheckBoxItem};
+export { ProgressList, CheckBoxItem };
