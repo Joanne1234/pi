@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import {InfoCardSimple, InfoCardExpanded} from "../components/InfoCard";
 
 function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>My Goals</Text>
+      <InfoCardSimple/>
+      <InfoCardExpanded/>
     </View>
   );
 }
@@ -12,7 +14,7 @@ function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#E5E5E5",
     alignItems: "center",
     justifyContent: "center",
   },
