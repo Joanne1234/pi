@@ -10,6 +10,7 @@ function ToDoScreen({ toDoList }) {
         style={styles.list}
         expanded={false}
         toDoList={toDoList || []}
+        listFooterComponent={<CreateGoalButton style={styles.button} />}
       />
       <CreateGoalButton style={styles.button} />
     </View>
