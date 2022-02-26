@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { RoundedCheckbox } from "react-native-rounded-checkbox";
+// import { RoundedCheckbox } from "react-native-rounded-checkbox";
 import { useEffect, useState } from "react";
 //import Checkbox from 'expo-checkbox';
 function ProgressList({ tasks, completed, setChange }) {
@@ -45,7 +45,7 @@ function CheckBoxItem({ task, setChange }) {
       ]}
     >
       <View style={styles.checkBox}>
-        <RoundedCheckbox
+        {/*<RoundedCheckbox
           onPress={(checked) => {
             setCompleted(checked);
             setChange(Math.random().toString(36));
@@ -59,7 +59,7 @@ function CheckBoxItem({ task, setChange }) {
           textStyle={styles.check}
           isChecked={task.completed}
           outerStyle
-        />
+        />*/}
       </View>
       <Text
         style={[
