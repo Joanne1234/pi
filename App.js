@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import AppLoading from "expo-app-loading";
 import TabBar from "./components/TabBar";
+
 import {
   useFonts,
   Poppins_400Regular,
