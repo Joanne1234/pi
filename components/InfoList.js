@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { InfoCardExpanded, InfoCardSimple } from "./InfoCard";
+import InfoCard from "./InfoCard";
 
 function InfoList({ toDoList, expanded, onGoalClick }) {
   console.log(toDoList);
@@ -16,11 +16,7 @@ function InfoList({ toDoList, expanded, onGoalClick }) {
             onGoalClick && onGoalClick(item.item.id);
           }}
         >
-          {expanded ? (
-            <InfoCardExpanded goal={item.item} />
-          ) : (
-            <InfoCardSimple goal={item.item} />
-          )}
+          <InfoCard goal={item.item} progress={expanded} />
         </TouchableOpacity>
       )}
     </>

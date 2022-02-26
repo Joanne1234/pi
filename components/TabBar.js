@@ -6,7 +6,7 @@ import HomeScreen from "../screens/HomeScreen";
 import PetScreen from "../screens/PetScreen";
 import GoalDetailsScreen from "../screens/GoalDetailsScreen";
 import { initMockState } from "../lib/mocks";
-import GoalStackNavigator from "./GoalStackNavigator";
+import ToDoScreen from "../screens/ToDoScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -49,7 +49,7 @@ const TabBar = () => {
         />
         <Tab.Screen
           name="To Do"
-          children={() => <GoalStackNavigator />}
+          children={() => <ToDoScreen />}
           options={{
             tabBarLabel: "To Do",
             tabBarIcon: ({ color, size }) => (
@@ -87,7 +87,7 @@ const TabBar = () => {
         />
         <Tab.Screen
           name="GoalDetails"
-          children={GoalDetailsScreen}
+          children={() => <GoalDetailsScreen />}
           options={{
             tabBarButton: () => null,
             tabBarStyle: {

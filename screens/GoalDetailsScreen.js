@@ -29,7 +29,7 @@ const GoalDetailsScreen = () => {
 
   return (
     <>
-      {goal.id && (
+      {Object.keys(goal).length > 0 && (
         <View style={styles.container}>
           <View style={styles.status}>
             <PercentageCompleteText style={styles.percentage} goal={goal} />
