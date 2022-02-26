@@ -7,6 +7,7 @@ import PetScreen from "../screens/PetScreen";
 import GoalDetailsScreen from "../screens/GoalDetailsScreen";
 import { initMockState } from "../lib/mocks";
 import ToDoScreen from "../screens/ToDoScreen";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,28 +20,29 @@ const TabBar = () => {
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Home"
-        tabBarOptions={{
-          showLabel: false,
-        }}
         screenOptions={{
           tabBarActiveTintColor: "#eaac30",
           tabBarInactiveTintColor: "#14142B",
           tabBarLabel: "",
+          tabBarShowLabel: false,
           tabBarStyle: {
             position: "absolute",
             backgroundColor: "#ffffff",
             borderTopWidth: 0,
             elevation: 0,
-            height: 56,
+            height: 106,
             paddingTop: 16,
-            paddingBottom: 16,
+            paddingBottom: 66,
           },
+          headerTitleAlign: "center",
+          headerLeft: () => <View />,
         }}
       >
         <Tab.Screen
           name="Home"
           children={() => <HomeScreen />}
           options={{
+            headerShown: false,
             tabBarLabel: "Home",
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="home" color={color} size={size} />
@@ -52,6 +54,7 @@ const TabBar = () => {
           children={() => <ToDoScreen />}
           options={{
             tabBarLabel: "To Do",
+            headerShown: false,
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
                 name="format-list-bulleted-square"
@@ -88,7 +91,7 @@ const TabBar = () => {
         <Tab.Screen
           name="GoalDetails"
           children={() => <GoalDetailsScreen />}
-          options={{
+          options={({ navigation }) => ({
             tabBarButton: () => null,
             tabBarStyle: {
               display: "none",
@@ -104,10 +107,31 @@ const TabBar = () => {
               lineHeight: 28,
               color: "#FCFCFC",
             },
-          }}
+            headerRight: (_props) => (
+              <TouchableOpacity
+                style={styles.closeStyles}
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              >
+                <MaterialCommunityIcons
+                  name="close"
+                  size={24}
+                  color="#FCFCFC"
+                />
+              </TouchableOpacity>
+            ),
+          })}
         />
       </Tab.Navigator>
     </NavigationContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  closeStyles: {
+    marginRight: 25,
+  },
+});
+
 export default TabBar;

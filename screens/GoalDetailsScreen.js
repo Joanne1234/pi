@@ -9,28 +9,25 @@ import { getGoal } from "../lib/goals-helper";
 const GoalDetailsScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  const goalId = route.params.goalId;
   const [change, setChange] = useState(0);
 
   const [goal, setGoal] = useState({});
 
   const fetchGoal = async () => {
-    const currentGoal = await getGoal(goalId);
-    console.log(currentGoal);
-    console.log(goalId);
-    console.log(route.params);
+    const currentGoal = await getGoal(route.params.goalId);
     setGoal({ ...currentGoal });
     navigation.setOptions({ title: currentGoal.title });
   };
 
   useEffect(() => {
+    setGoal({});
     fetchGoal();
-  }, []);
+  }, [route.params.goalId]);
 
   return (
-    <>
+    <View style={styles.container}>
       {Object.keys(goal).length > 0 && (
-        <View style={styles.container}>
+        <>
           <View style={styles.status}>
             <PercentageCompleteText style={styles.percentage} goal={goal} />
             <Text style={styles.text}>days</Text>
@@ -57,19 +54,20 @@ const GoalDetailsScreen = () => {
               />
             </View>
           </View>
-        </View>
+        </>
       )}
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#F7F7FC",
   },
   footerWrapper: {
     position: "absolute",
-    bottom: 0,
+    bottom: 50,
     left: 0,
     right: 0,
     flex: 1,
