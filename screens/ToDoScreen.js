@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import InfoList from "../components/InfoList";
 import { getGoals } from "../lib/goals-helper";
@@ -26,9 +26,14 @@ function ToDoScreen() {
         toDoList={todoList || []}
         onGoalClick={(goalId) => navigation.navigate("GoalDetails", { goalId })}
       />
-      <View style={styles.buttonContainer}>
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() => {
+          navigation.navigate("CrateGoal");
+        }}
+      >
         <CreateGoalButton />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -54,6 +59,7 @@ const styles = StyleSheet.create({
     left: 24,
     right: 24,
     alignItems: "center",
+    zIndex: 3,
   },
 });
 export default ToDoScreen;

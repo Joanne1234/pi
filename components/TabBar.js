@@ -5,6 +5,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import HomeScreen from "../screens/HomeScreen";
 import PetScreen from "../screens/PetScreen";
 import GoalDetailsScreen from "../screens/GoalDetailsScreen";
+import CreateGoalScreen from "../screens/CreateGoalScreen";
 import { initMockState } from "../lib/mocks";
 import ToDoScreen from "../screens/ToDoScreen";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
@@ -96,6 +97,42 @@ const TabBar = () => {
             tabBarStyle: {
               display: "none",
             },
+            headerStyle: {
+              backgroundColor: "#EAAC30",
+              borderBottomWidth: 0,
+              elevation: 0,
+            },
+            headerTitleStyle: {
+              fontFamily: "Poppins_700Bold",
+              fontSize: 17,
+              lineHeight: 28,
+              color: "#FCFCFC",
+            },
+            headerRight: (_props) => (
+              <TouchableOpacity
+                style={styles.closeStyles}
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              >
+                <MaterialCommunityIcons
+                  name="close"
+                  size={24}
+                  color="#FCFCFC"
+                />
+              </TouchableOpacity>
+            ),
+          })}
+        />
+        <Tab.Screen
+          name="CrateGoal"
+          children={() => <CreateGoalScreen />}
+          options={({ navigation }) => ({
+            tabBarButton: () => null,
+            tabBarStyle: {
+              display: "none",
+            },
+            headerTitle: "Create Goal",
             headerStyle: {
               backgroundColor: "#EAAC30",
               borderBottomWidth: 0,
