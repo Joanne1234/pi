@@ -47,9 +47,8 @@ function InfoCardExpanded({ goal }) {
   const percentageTasksCompleted = getPercentageTasksCompleted(goal);
   const navigation = useNavigation();
   const onClick = () => {
-    console.log(goal);
-    navigation.navigate("ToDo", {
-      screen: "GoalDetails",
+    navigation.navigate("To Do", {
+      screen: "Goal Details",
       params: { goal: goal },
     });
   };
@@ -126,7 +125,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 32,
     color: "#14142B",
-    paddingRight: 10,
     alignSelf: "center",
   },
 });

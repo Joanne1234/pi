@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View } from "react-native";
-import InfoList from "../components/InfoList";
 
 function CreateGoalScreen() {
   return (
