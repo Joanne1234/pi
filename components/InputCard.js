@@ -1,12 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 
-const InputCard = ({ placeholder, value, onChange }) => (
+const InputCard = ({ placeholder, value, onChange, onSubmitEditing }) => (
   <TextInput
     style={styles.input}
     value={value}
     onChangeText={onChange}
     placeholder={placeholder}
+    onSubmitEditing={onSubmitEditing}
   />
 );
 
