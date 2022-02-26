@@ -5,9 +5,9 @@ import { InfoCardExpanded, InfoCardSimple } from "./InfoCard";
 function InfoList({ toDoList, expanded, listFooterComponent }) {
   const renderItem = (item) => {
     if (expanded) {
-      return (<InfoCardExpanded task={item.item}/>)
+      return (<InfoCardExpanded goal={item.item}/>)
     } 
-    return (<InfoCardSimple task={item.item}/>)
+    return (<InfoCardSimple goal={item.item}/>)
   }
   if (!toDoList || toDoList.length == 0) {
     return (

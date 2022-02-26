@@ -4,8 +4,9 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import HomeScreen from "../screens/HomeScreen";
 import PetScreen from "../screens/PetScreen";
 import GoalCreateScreen from "../screens/GoalCreateScreen";
-import ToDoScreen from "../screens/ToDoScreen"
 import GoalStackNavigator from "./GoalStackNavigator";
+import ToDoScreen from "../screens/ToDoScreen";
+import GoalDetailsScreen from "../screens/GoalCreateScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -89,8 +90,8 @@ function TabBar() {
           }}
         />
         <Tab.Screen
-          name="To Do"
-          children={() => <GoalStackNavigator toDoList={toDoList}/>}
+          name="ToDo"
+          children={() => <ToDoScreen toDoList={toDoList}/>}
           options={{
             tabBarLabel: "To Do",
             tabBarIcon: ({ color, size }) => (
@@ -147,6 +148,24 @@ function TabBar() {
             },
           }}
         />
+        <Tab.Screen name="GoalDetails" children={() => <GoalDetailsScreen goal={goal}/>} initialParams={toDoList.length > 1 ? toDoList[0] : {}}
+          options={{
+            tabBarButton: () => null,
+            tabBarStyle: {
+              display: "none",
+            },
+            headerStyle: {
+              backgroundColor: "#EAAC30",
+              borderBottomWidth: 0,
+              elevation: 0,
+            },
+            headerTitleStyle: {
+              fontFamily: "Poppins_700Bold",
+              fontSize: 17,
+              lineHeight: 28,
+              color: "#FCFCFC",
+            },
+          }}/>
       </Tab.Navigator>
     </NavigationContainer>
   );

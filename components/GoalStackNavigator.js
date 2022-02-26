@@ -7,10 +7,12 @@ const Stack = createStackNavigator();
 
 function GoalStackNavigator({ toDoList, goal }) {
   return (
-    <Stack.Navigator initialRouteName="ToDoScreen">
-      <Stack.Screen name="To Do List" children={() => <ToDoScreen toDoList={toDoList}/>} />
-      <Stack.Screen name="Create Goal" component={CreateGoalScreen} />
-      <Stack.Screen name="Goal Details" children={() => <GoalDetailsScreen goal={goal}/>} />
+    <Stack.Navigator 
+      initialRouteName="ToDoList"
+    >
+      <Stack.Screen name="ToDoList" children={() => <ToDoScreen toDoList={toDoList}/>} />
+      <Stack.Screen name="CreateGoal" component={CreateGoalScreen} />
+      <Stack.Screen name="GoalDetails" children={() => <GoalDetailsScreen goal={goal}/>} initialParams={toDoList.length > 1 ? toDoList[0] : {}}/>
     </Stack.Navigator>
   );
 }

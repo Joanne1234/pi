@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 function CreateGoalButton() {
   const navigation = useNavigation();
   const onClick = () => {
-    navigation.navigate("Create Goal")
+    navigation.navigate("CreateGoal")
   }
   return (
     <View style={styles.container}>
