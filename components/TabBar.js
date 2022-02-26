@@ -53,7 +53,7 @@ const TabBar = () => {
         />
         <Tab.Screen
           name="To Do"
-          children={() => <ToDoScreen />}
+          children={() => <GoalStackNavigator />}
           options={{
             tabBarLabel: "To Do",
             tabBarIcon: ({ color, size }) => (
