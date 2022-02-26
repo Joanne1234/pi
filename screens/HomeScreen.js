@@ -23,7 +23,9 @@ function HomeScreen() {
       <InfoList
         expanded={true}
         toDoList={todoList || []}
-        onGoalClick={(goalId) => navigation.navigate("GoalDetails", { goalId })}
+        onGoalClick={(goalId) =>
+          navigation.navigate("Goal Details", { goalId })
+        }
       />
     </View>
   );

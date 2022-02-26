@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { useState, useEffect } from "react";
 import InfoList from "../components/InfoList";
 import { getGoals } from "../lib/goals-helper";
-import CreateGoalButton from "../components/CreateGoalButton";
+import { CreateGoalButton } from "../components/Button";
 
 function ToDoScreen() {
   const [todoList, setTodoList] = useState([]);

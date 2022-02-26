@@ -27,13 +27,9 @@ function InfoCardSimple({ goal }) {
   const completedTaskAmount = getNumberOfTasksCompleted(goal);
   const navigation = useNavigation();
   const onClick = () => {
-    console.log("onclick info card simple");
-    navigation.navigate("Goal Details", { goal: goal });
-    /*navigation.navigate("ToDo", {
-      screen: "GoalDetails", 
-      params: { goal: goal }
-    })*/
+    navigation.navigate("Goal Details", { goalId: goal.id });
   };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onClick}>
@@ -53,7 +49,7 @@ function InfoCardExpanded({ goal }) {
   const onClick = () => {
     navigation.navigate("To Do", {
       screen: "Goal Details",
-      params: { goal: goal },
+      params: { goalId: goal.id },
     });
   };
   return (
