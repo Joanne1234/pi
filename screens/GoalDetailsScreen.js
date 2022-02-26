@@ -4,7 +4,7 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import InputCard from "../components/InputCard";
 import { PercentageCompleteText } from "../components/InfoCard";
 import { ProgressList, CheckBoxItem } from "../components/ProgressList";
-import { getGoal } from "../lib/goals-helper";
+import { getGoal, addTask } from "../lib/goals-helper";
 
 // get amount of days till date
 const getDaysTillDate = (dateString) => {
@@ -32,7 +32,7 @@ const GoalDetailsScreen = () => {
   useEffect(() => {
     setGoal({});
     fetchGoal();
-  }, [route.params.goalId]);
+  }, [route.params.goalId, change]);
 
   const Days = () => {
     const daysLeft = getDaysTillDate(goal.targetDate);
@@ -74,6 +74,13 @@ const GoalDetailsScreen = () => {
                 }}
                 placeholder="Task title"
                 value={taskValue}
+                onSubmitEditing={async () => {
+                  if (taskValue !== "") {
+                    await addTask(route.params.goalId, taskValue);
+                    setTaskValue("");
+                    setChange(change + 1);
+                  }
+                }}
               />
             </View>
           </View>
