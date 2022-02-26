@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import InfoList from "../components/InfoList";
 
-function HomeScreen({ toDoList }) {
+function ToDoScreen({ toDoList }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>My Goals</Text>
-      <InfoList expanded={true} toDoList={toDoList || []}/>
+      <Text style={styles.heading}>To Do List</Text>
+      <InfoList expanded={false} toDoList={toDoList || []}/>
     </View>
   );
 }
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
     color: "#14142B",
   },
 });
-export default HomeScreen;
+export default ToDoScreen;
