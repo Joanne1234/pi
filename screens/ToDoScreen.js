@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import { CreateGoalButton } from "../components/Button";
 import InfoList from "../components/InfoList";
+import { useNavigation } from '@react-navigation/native';
 
 function ToDoScreen({ toDoList }) {
+  const navigation = useNavigation();
+  console.log(navigation)
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>To Do List</Text>
+      <CreateGoalButton style={styles.button}/>
       <InfoList 
         style={styles.list} 
         expanded={false} 

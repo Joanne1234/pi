@@ -5,12 +5,12 @@ import GoalDetailsScreen from "../screens/GoalDetailsScreen";
 
 const Stack = createStackNavigator();
 
-function GoalStackNavigator() {
+function GoalStackNavigator({ toDoList, goal }) {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="ToDoScreen" component={ToDoScreen} />
+    <Stack.Navigator initialRouteName="ToDoScreen">
+      <Stack.Screen name="To Do List" children={() => <ToDoScreen toDoList={toDoList}/>} />
       <Stack.Screen name="Create Goal" component={CreateGoalScreen} />
-      <Stack.Screen name="Goal Details" component={GoalDetailsScreen} />
+      <Stack.Screen name="Goal Details" children={() => <GoalDetailsScreen goal={goal}/>} />
     </Stack.Navigator>
   );
 }
