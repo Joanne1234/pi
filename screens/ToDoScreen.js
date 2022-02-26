@@ -36,5 +36,11 @@ const styles = StyleSheet.create({
     lineHeight: 48,
     color: "#14142B",
   },
+  list: {
+    //flex: 3
+  },
+  button: {
+    flex: 1,
+  },
 });
 export default ToDoScreen;
