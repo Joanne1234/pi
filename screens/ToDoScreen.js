@@ -6,7 +6,12 @@ function ToDoScreen({ toDoList }) {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>To Do List</Text>
-      <InfoList style={styles.list} expanded={false} toDoList={toDoList || []}/>
+      <InfoList 
+        style={styles.list} 
+        expanded={false} 
+        toDoList={toDoList || []}
+        listFooterComponent={<CreateGoalButton style={styles.button}/>}
+      />
       <CreateGoalButton style={styles.button}/>
     </View>
   );
@@ -17,7 +22,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F7F7FC",
     alignItems: "center",
-    justifyContent: "center",
+    flexDirection: "column",
   },
   heading: {
     fontFamily: "Poppins_700Bold",
