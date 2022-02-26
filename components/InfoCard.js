@@ -5,7 +5,7 @@ function InfoCardSimple({ task }) {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>{task?.title || "InfoCard"}</Text>
-      <Text style={styles.subheading}>{task?.completedTasks || 0}/{task?.totalTasks || 6} Tasks completed</Text>
+      <Text style={styles.subheading}>{task?.completedTasks || 0} / {task?.totalTasks || 6} Tasks completed</Text>
     </View>
   );
 }
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     borderColor: '#20232a',
     padding: 15,
     marginHorizontal: 20,
-    marginTop: 10, 
-    marginBottom: 20,
+    marginTop: 20, 
+    marginBottom: 10,
     alignSelf: 'stretch',
   },
   heading: {
