@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import InfoList from "../components/InfoList";
 
-function HomeScreen({ toDoList }) {
+function HomeScreen({ navigation, toDoList }) {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>My Goals</Text>
-      <InfoList expanded={true} toDoList={toDoList || []}/>
+      <InfoList expanded={true} toDoList={toDoList || []} />
     </View>
   );
 }

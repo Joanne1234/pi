@@ -4,6 +4,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import HomeScreen from "../screens/HomeScreen";
 import PetScreen from "../screens/PetScreen";
 import ToDoScreen from "../screens/ToDoScreen";
+import GoalCreateScreen from "../screens/GoalCreateScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -12,18 +13,48 @@ function TabBar() {
     {
       id: 1,
       title: "House Work",
-      description: "Vacuum bedroom",
-      completedTasks: 1,
-      totalTasks: 2
+      targetDate: "2022-02-27",
+      tasks: [
+        {
+          id: 1,
+          title: "Vacuum",
+          completed: false,
+        },
+        {
+          id: 2,
+          title: "Wash",
+          completed: false,
+        },
+        {
+          id: 3,
+          title: "Mop",
+          completed: false,
+        },
+      ],
     },
     {
       id: 2,
       title: "English Report",
-      description: "Complete Bibliography",
-      completedTasks: 0,
-      totalTasks: 1
+      targetDate: "2022-02-27",
+      tasks: [
+        {
+          id: 1,
+          title: "Introduction",
+          completed: true,
+        },
+        {
+          id: 2,
+          title: "Reading",
+          completed: true,
+        },
+        {
+          id: 3,
+          title: "Writing",
+          completed: false,
+        },
+      ],
     },
-  ]
+  ];
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -48,7 +79,7 @@ function TabBar() {
       >
         <Tab.Screen
           name="Home"
-          children={() => <HomeScreen toDoList={toDoList}/>}
+          children={() => <HomeScreen toDoList={toDoList} />}
           options={{
             tabBarLabel: "Home",
             tabBarIcon: ({ color, size }) => (
@@ -58,7 +89,7 @@ function TabBar() {
         />
         <Tab.Screen
           name="To Do"
-          children={() => <ToDoScreen toDoList={toDoList}/>}
+          children={() => <ToDoScreen toDoList={toDoList} />}
           options={{
             tabBarLabel: "To Do",
             tabBarIcon: ({ color, size }) => (
@@ -92,6 +123,27 @@ function TabBar() {
                 size={size}
               />
             ),
+          }}
+        />
+        <Tab.Screen
+          name="GoalCreate"
+          component={GoalCreateScreen}
+          options={{
+            tabBarButton: () => null,
+            tabBarStyle: {
+              display: "none",
+            },
+            headerStyle: {
+              backgroundColor: "#EAAC30",
+              borderBottomWidth: 0,
+              elevation: 0,
+            },
+            headerTitleStyle: {
+              fontFamily: "Poppins_700Bold",
+              fontSize: 17,
+              lineHeight: 28,
+              color: "#FCFCFC",
+            },
           }}
         />
       </Tab.Navigator>
