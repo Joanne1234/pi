@@ -19,7 +19,7 @@ function TabBar() {
         {
           id: 1,
           title: "Vacuum",
-          completed: false,
+          completed: true,
         },
         {
           id: 2,
@@ -29,7 +29,7 @@ function TabBar() {
         {
           id: 3,
           title: "Mop",
-          completed: false,
+          completed: true,
         },
       ],
     },

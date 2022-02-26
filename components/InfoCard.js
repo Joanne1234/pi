@@ -28,7 +28,11 @@ function InfoCardSimple({ goal }) {
   const navigation = useNavigation()
   const onClick = () => {
     console.log("onclick info card simple")
-    navigation.navigate("GoalDetails", { goal: goal })
+    navigation.navigate("Goal Details", {goal: goal})
+    /*navigation.navigate("ToDo", {
+      screen: "GoalDetails", 
+      params: { goal: goal }
+    })*/
   }
   return (
     <View style={styles.container}>
@@ -47,9 +51,8 @@ function InfoCardExpanded({ goal }) {
   const percentageTasksCompleted = getPercentageTasksCompleted(goal);
   const navigation = useNavigation()
   const onClick = () => {
-    console.log(goal)
-    navigation.navigate("ToDo", {
-      screen: "GoalDetails", 
+    navigation.navigate("To Do", {
+      screen: "Goal Details", 
       params: { goal: goal }
     })
   }
@@ -126,7 +129,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 32,
     color: "#14142B",
-    paddingRight: 10,
     alignSelf: "center",
   },
 });
