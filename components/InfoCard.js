@@ -1,21 +1,21 @@
 import { StyleSheet, Text, View } from "react-native";
 import * as Progress from 'expo-progress';
 
-function InfoCardSimple({ title, completedTasks, totalTasks }) {
+function InfoCardSimple({ task }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>{title || "InfoCard"}</Text>
-      <Text style={styles.subheading}>{completedTasks || 0}/{totalTasks || 6} Tasks completed</Text>
+      <Text style={styles.heading}>{task?.title || "InfoCard"}</Text>
+      <Text style={styles.subheading}>{task?.completedTasks || 0}/{task?.totalTasks || 6} Tasks completed</Text>
     </View>
   );
 }
 
-function InfoCardExpanded({ title, description, completed, total }) {
-  const progress = (completed || 0.5)/(total || 1)
+function InfoCardExpanded({ task }) {
+  const progress = (task?.completedTasks || 0.5)/(task?.totalTasks || 1)
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>{title || "InfoCard"}</Text>
-      <Text style={styles.subheading}>{description || "Expanded"}</Text>
+      <Text style={styles.heading}>{task?.title || "InfoCard"}</Text>
+      <Text style={styles.subheading}>{task?.description || "Expanded"}</Text>
       <Progress.Bar 
         color="#EAAC30" 
         progress={progress}

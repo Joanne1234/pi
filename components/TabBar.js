@@ -3,10 +3,27 @@ import { NavigationContainer } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import HomeScreen from "../screens/HomeScreen";
 import PetScreen from "../screens/PetScreen";
+import ToDoScreen from "../screens/ToDoScreen";
 
 const Tab = createBottomTabNavigator();
 
 function TabBar() {
+  const toDoList = [
+    {
+      id: 1,
+      title: "House Work",
+      description: "Vacuum bedroom",
+      completedTasks: 1,
+      totalTasks: 2
+    },
+    {
+      id: 2,
+      title: "English Report",
+      description: "Complete Bibliography",
+      completedTasks: 0,
+      totalTasks: 1
+    },
+  ]
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -31,7 +48,7 @@ function TabBar() {
       >
         <Tab.Screen
           name="Home"
-          component={HomeScreen}
+          children={() => <HomeScreen toDoList={toDoList}/>}
           options={{
             tabBarLabel: "Home",
             tabBarIcon: ({ color, size }) => (
@@ -41,7 +58,7 @@ function TabBar() {
         />
         <Tab.Screen
           name="To Do"
-          component={HomeScreen}
+          children={() => <ToDoScreen toDoList={toDoList}/>}
           options={{
             tabBarLabel: "To Do",
             tabBarIcon: ({ color, size }) => (
