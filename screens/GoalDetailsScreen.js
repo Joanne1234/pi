@@ -1,29 +1,65 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import InputCard from "../components/InputCard";
+import { PercentageCompleteText } from "../components/InfoCard";
+import { ProgressList, CheckBoxItem } from "../components/ProgressList";
+import { getGoal } from "../lib/goals-helper";
 
 const GoalDetailsScreen = () => {
-  const router = useRoute();
+  const route = useRoute();
+  const navigation = useNavigation();
+  const goalId = route.params.goalId;
+  const [change, setChange] = useState(0);
 
-  const [taskValue, setTaskValue] = useState("");
+  const [goal, setGoal] = useState({});
+
+  const fetchGoal = async () => {
+    const currentGoal = await getGoal(goalId);
+    console.log(currentGoal);
+    console.log(goalId);
+    console.log(route.params);
+    setGoal({ ...currentGoal });
+    navigation.setOptions({ title: currentGoal.title });
+  };
+
+  useEffect(() => {
+    fetchGoal();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Goal Id: {JSON.stringify(router.params.goalId)}</Text>
-
-      <View style={styles.footerWrapper}>
-        <Text style={styles.heading}>Add task to goal</Text>
-        <View style={styles.inputContainer}>
-          <InputCard
-            onChange={(val) => {
-              setTaskValue(val);
-            }}
-            placeholder="Task title"
-            value={taskValue}
+    <>
+      {goal.id && (
+        <View style={styles.container}>
+          <View style={styles.status}>
+            <PercentageCompleteText style={styles.percentage} goal={goal} />
+            <Text style={styles.text}>days</Text>
+          </View>
+          <ProgressList
+            tasks={goal.tasks}
+            completed={true}
+            setChange={setChange}
           />
+          <ProgressList
+            tasks={goal.tasks}
+            completed={false}
+            setChange={setChange}
+          />
+          <View style={styles.footerWrapper}>
+            <Text style={styles.heading}>Add task to goal</Text>
+            <View style={styles.inputContainer}>
+              <InputCard
+                onChange={(val) => {
+                  // setTaskValue(val);
+                }}
+                placeholder="Task title"
+                value={/*taskValue*/ ""}
+              />
+            </View>
+          </View>
         </View>
-      </View>
-    </View>
+      )}
+    </>
   );
 };
 
@@ -57,6 +93,25 @@ const styles = StyleSheet.create({
     marginLeft: 24,
     marginRight: 24,
     marginBottom: 0,
+  },
+  text: {
+    fontFamily: "Poppins_600SemiBold",
+    fontSize: 18,
+    lineHeight: 32,
+    color: "#14142B",
+    alignSelf: "center",
+    paddingHorizontal: 10,
+  },
+  status: {
+    flexDirection: "row",
+    alignContent: "space-between",
+    justifyContent: "space-between",
+    alignSelf: "stretch",
+    marginHorizontal: 20,
+    paddingVertical: 10,
+  },
+  percentage: {
+    alignSelf: "center",
   },
 });
 export default GoalDetailsScreen;

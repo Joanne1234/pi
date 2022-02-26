@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
-import * as Progress from "expo-progress";
+import { LinearProgress } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const getNextTaskInGoal = (goal) => {
   const tasks = goal.tasks;
@@ -23,13 +25,19 @@ const getPercentageTasksCompleted = (goal) => {
 
 function InfoCardSimple({ goal }) {
   const completedTaskAmount = getNumberOfTasksCompleted(goal);
+  const navigation = useNavigation();
+  const onClick = () => {
+    navigation.navigate("Goal Details", { goalId: goal.id });
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>{goal.title}</Text>
-      <Text style={styles.subheading}>
-        {completedTaskAmount}/{goal.tasks.length} Tasks completed
-      </Text>
+      <TouchableOpacity onPress={onClick}>
+        <Text style={styles.heading}>{goal.title}</Text>
+        <Text style={styles.subheading}>
+          {completedTaskAmount}/{goal.tasks.length} Tasks completed
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -37,25 +45,40 @@ function InfoCardSimple({ goal }) {
 function InfoCardExpanded({ goal }) {
   const nextTask = getNextTaskInGoal(goal);
   const percentageTasksCompleted = getPercentageTasksCompleted(goal);
-
+  const navigation = useNavigation();
+  const onClick = () => {
+    navigation.navigate("To Do", {
+      screen: "Goal Details",
+      params: { goalId: goal.id },
+    });
+  };
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>{goal.title}</Text>
-      {nextTask && <Text style={styles.subheading}>{nextTask.title}</Text>}
-      <Progress.Bar
-        color="#EAAC30"
-        progress={percentageTasksCompleted}
-        trackColor="#EFF0F6"
-        borderRadius={6}
-        height={12}
-        style={styles.bar}
-      />
-      <View style={styles.line}>
-        <Text style={styles.percentage}>
-          {Math.round(percentageTasksCompleted * 100)}%{" "}
-        </Text>
-        <Text style={styles.text}>Complete</Text>
-      </View>
+      <TouchableOpacity onPress={onClick}>
+        <Text style={styles.heading}>{goal.title}</Text>
+        {nextTask && <Text style={styles.subheading}>{nextTask.title}</Text>}
+        <LinearProgress
+          color="#EAAC30"
+          value={percentageTasksCompleted}
+          trackColor="#EFF0F6"
+          borderRadius={6}
+          height={12}
+          style={styles.bar}
+          variant="determinate"
+        />
+        <PercentageCompleteText goal={goal} />
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+function PercentageCompleteText({ goal }) {
+  return (
+    <View style={styles.line}>
+      <Text style={styles.percentage}>
+        {Math.round(getPercentageTasksCompleted(goal) * 100)}%{" "}
+      </Text>
+      <Text style={styles.text}>Complete</Text>
     </View>
   );
 }
@@ -67,8 +90,8 @@ const styles = StyleSheet.create({
     borderColor: "#20232a",
     padding: 15,
     marginHorizontal: 20,
-    marginTop: 10,
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom: 10,
     alignSelf: "stretch",
   },
   heading: {
@@ -103,8 +126,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 32,
     color: "#14142B",
-    paddingRight: 10,
     alignSelf: "center",
   },
 });
-export { InfoCardSimple, InfoCardExpanded };
+export {
+  InfoCardSimple,
+  InfoCardExpanded,
+  PercentageCompleteText,
+  getNextTaskInGoal,
+  getNumberOfTasksCompleted,
+  getPercentageTasksCompleted,
+};

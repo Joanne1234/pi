@@ -4,9 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import HomeScreen from "../screens/HomeScreen";
 import PetScreen from "../screens/PetScreen";
-import ToDoScreen from "../screens/ToDoScreen";
 import GoalDetailsScreen from "../screens/GoalDetailsScreen";
 import { initMockState } from "../lib/mocks";
+import GoalStackNavigator from "./GoalStackNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -49,7 +49,7 @@ const TabBar = () => {
         />
         <Tab.Screen
           name="To Do"
-          children={() => <ToDoScreen />}
+          children={() => <GoalStackNavigator />}
           options={{
             tabBarLabel: "To Do",
             tabBarIcon: ({ color, size }) => (
@@ -87,7 +87,7 @@ const TabBar = () => {
         />
         <Tab.Screen
           name="GoalDetails"
-          component={GoalDetailsScreen}
+          children={GoalDetailsScreen}
           options={{
             tabBarButton: () => null,
             tabBarStyle: {

@@ -23,7 +23,9 @@ function HomeScreen() {
       <InfoList
         expanded={true}
         toDoList={todoList || []}
-        onGoalClick={(goalId) => navigation.navigate("GoalDetails", { goalId })}
+        onGoalClick={(goalId) =>
+          navigation.navigate("Goal Details", { goalId })
+        }
       />
     </View>
   );
@@ -34,7 +36,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F7F7FC",
     alignItems: "center",
-    justifyContent: "center",
   },
   heading: {
     fontFamily: "Poppins_700Bold",
