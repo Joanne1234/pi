@@ -22,8 +22,8 @@ function GoalDetailsScreen() {
       <PercentageCompleteText style={styles.percentage} goal={goal}/>
       <Text style={styles.text}>days</Text>
       </View>
-      <ProgressList tasks={goal.tasks} completed={true} setChange={setChange}/>
       <ProgressList tasks={goal.tasks} completed={false} setChange={setChange}/>
+      <ProgressList tasks={goal.tasks} completed={true} setChange={setChange}/>
     </View>
   );
 }
