@@ -16,6 +16,16 @@ function CreateGoalButton() {
   );
 }
 
+function CanvasButton({ text, onClick }) {
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.button} onPress={onClick}>
+        <Text style={styles.heading}>{text || ""}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#EAAC30",
@@ -30,12 +40,22 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 24,
     color: "#FCFCFC",
+    paddingHorizontal: 5
   },
   button: {
     alignSelf: 'center',
+  },
+  smallContainer: {
+    backgroundColor: "#EAAC30",
+    padding: 12,
+    alignSelf: 'stretch',
+    alignItems: 'stretch',
+    borderRadius: 5,
+    margin: 5
   }
 });
 
 export {
-  CreateGoalButton
+  CreateGoalButton,
+  CanvasButton
 };

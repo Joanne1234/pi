@@ -60,9 +60,6 @@ function TabBar() {
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Home"
-        tabBarOptions={{
-          showLabel: false,
-        }}
         screenOptions={{
           tabBarActiveTintColor: "#eaac30",
           tabBarInactiveTintColor: "#14142B",
@@ -76,6 +73,7 @@ function TabBar() {
             paddingTop: 16,
             paddingBottom: 16,
           },
+          tabBarShowLabel: false
         }}
       >
         <Tab.Screen
