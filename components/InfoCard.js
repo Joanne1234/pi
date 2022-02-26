@@ -90,9 +90,9 @@ const styles = StyleSheet.create({
     borderColor: "#20232a",
     padding: 15,
     marginHorizontal: 20,
-    marginTop: 10,
-    marginBottom: 20,
-    alignSelf: "stretch",
+    marginTop: 20, 
+    marginBottom: 10,
+    alignSelf: 'stretch',
   },
   heading: {
     fontFamily: "Poppins_600SemiBold",
@@ -130,4 +130,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 });
-export { InfoCardSimple, InfoCardExpanded, PercentageCompleteText, getNextTaskInGoal, getNumberOfTasksCompleted, getPercentageTasksCompleted };
+export { 
+  InfoCardSimple, 
+  InfoCardExpanded, 
+  PercentageCompleteText, 
+  getNextTaskInGoal, 
+  getNumberOfTasksCompleted, 
+  getPercentageTasksCompleted };
