@@ -1284,6 +1284,11 @@
     lodash.pick "^4.4.0"
     lodash.template "^4.5.0"
 
+"@freakycoder/react-native-bounceable@^0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@freakycoder/react-native-bounceable/-/react-native-bounceable-0.2.5.tgz#ad61bdafbf68465e9c2145e99c09b500ae091f0e"
+  integrity sha512-J8WBOYxbm/um7SqXYneduZ08T5Kin9z+ixsS3wOLtpeNvKscuqmDEgsgefTYydeSIoI5dOfWmklnRRgu5i/8nA==
+
 "@hapi/hoek@^9.0.0":
   version "9.2.1"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.2.1.tgz#9551142a1980503752536b5050fd99f4a7f13b17"
@@ -4916,6 +4921,11 @@ react-native-redash@^14.1.1:
     abs-svg-path "^0.1.1"
     normalize-svg-path "^1.0.1"
     parse-svg-path "^0.1.2"
+
+react-native-rounded-checkbox@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/react-native-rounded-checkbox/-/react-native-rounded-checkbox-0.3.3.tgz#05a753180604db61a074b2ef1ae7446347c3df8c"
+  integrity sha512-CR2C21SxPyR1D4HbX+z3/fn0Bf1AqTrn4bN+fR4wZ+c9/GHgBBz8whLsckz+7kxHqjFqGXwyFiuB7CQapO4TnQ==
 
 react-native-safe-area-context@3.3.2:
   version "3.3.2"
