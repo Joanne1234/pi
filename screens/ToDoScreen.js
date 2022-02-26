@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { useState, useEffect } from "react";
 import InfoList from "../components/InfoList";
 import { getGoals } from "../lib/goals-helper";
+import CreateGoalButton from "../components/CreateGoalButton";
 
 function ToDoScreen() {
   const [todoList, setTodoList] = useState([]);
@@ -19,6 +20,7 @@ function ToDoScreen() {
     <View style={styles.container}>
       <Text style={styles.heading}>To Do List</Text>
       <InfoList expanded={false} toDoList={todoList || []} />
+      <CreateGoalButton style={styles.button}/>
     </View>
   );
 }

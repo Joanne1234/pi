@@ -7,6 +7,9 @@ import PetScreen from "../screens/PetScreen";
 import ToDoScreen from "../screens/ToDoScreen";
 import GoalDetailsScreen from "../screens/GoalDetailsScreen";
 import { initMockState } from "../lib/mocks";
+import GoalCreateScreen from "../screens/GoalCreateScreen";
+import ToDoScreen from "../screens/ToDoScreen"
+import GoalStackNavigator from "./GoalStackNavigator";
 
 const Tab = createBottomTabNavigator();
 
