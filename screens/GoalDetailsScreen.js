@@ -3,6 +3,7 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from "react";
 import { PercentageCompleteText } from "../components/InfoCard";
 import { ProgressList, CheckBoxItem } from "../components/ProgressList"
+import ExpoPixi from 'expo-pixi';
 
 function GoalDetailsScreen() {
   const route = useRoute();
@@ -16,12 +17,31 @@ function GoalDetailsScreen() {
     //rerender
     console.log("goal changed")
   }, [change])
+  const color = 0x0000ff;
+  const width = 5;
+  const alpha = 0.5;
+  const onSketchChange = async ({ width, height }) => {
+    const options = {
+      format: 'png', /// PNG because the view has a clear background
+      quality: 0.1, /// Low quality works because it's just a line
+      result: 'file',
+      height,
+      width
+    };
+    /// Using 'Expo.takeSnapShotAsync', and our view 'this.sketch' we can get a uri of the image
+    const uri = await Expo.takeSnapshotAsync(this.sketch, options);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.status}>
       <PercentageCompleteText style={styles.percentage} goal={goal}/>
       <Text style={styles.text}>days</Text>
       </View>
+      <ExpoPixi.Sketch 
+        strokeColor={color}
+        strokeWidth={width}
+        strokeAlpha={alpha}
+      />
       <ProgressList tasks={goal.tasks} completed={false} setChange={setChange}/>
       <ProgressList tasks={goal.tasks} completed={true} setChange={setChange}/>
     </View>
