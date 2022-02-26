@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 //import { RoundedCheckbox } from "react-native-rounded-checkbox";
 import { useEffect, useState } from "react";
-
+import Checkbox from 'expo-checkbox';
 function ProgressList({ tasks, completed, setChange }) {
   console.log(tasks, completed)
   var displayList = tasks.filter(function (task) {
@@ -47,7 +47,12 @@ function CheckBoxItem({ task, setChange }) {
   return (
     <View style={[styles.cardContainer, {backgroundColor: completed ? "#EAF9DE" : "#FFFFFF"}]}>
       <View style={styles.checkBox}>
-        
+        <Checkbox
+            style={styles.check}
+            value={completed}
+            onValueChange={setCompleted}
+            color={completed ? "#008A00" : "#D9DBE9"}
+          />
       </View>
       <Text style={[styles.text, {
         color: completed ? "#008A00" : "#4E4B66", 
@@ -59,11 +64,11 @@ function CheckBoxItem({ task, setChange }) {
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
     alignSelf: 'stretch',
     margin: 10,
     borderRadius: 24,
-    marginBottom: 20
+    marginBottom: 20,
+    padding: 10
   },
   heading: {
     fontFamily: "Poppins_700Bold",
@@ -103,10 +108,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10
   },
   check: {
-    fontSize: 24,
+    alignSelf: "center"
   }, 
   checkBox: {
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    justifyContent: "center"
   }
 });
 export {ProgressList, CheckBoxItem};
