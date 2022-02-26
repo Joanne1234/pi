@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import InfoList from "../components/InfoList";
 import { getGoals } from "../lib/goals-helper";
 import { CreateGoalButton } from "../components/Button";
@@ -8,6 +8,7 @@ import { CreateGoalButton } from "../components/Button";
 function ToDoScreen() {
   const [todoList, setTodoList] = useState([]);
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
   const fetchTodoList = async () => {
     const list = await getGoals();
@@ -16,7 +17,7 @@ function ToDoScreen() {
 
   useEffect(() => {
     fetchTodoList();
-  }, []);
+  }, [isFocused]);
 
   return (
     <View style={styles.container}>

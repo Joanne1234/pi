@@ -1,9 +1,25 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import InputCard from "../components/InputCard";
+import { useNavigation } from "@react-navigation/native";
+import DateCard from "../components/DateCard";
+import { createGoal } from "../lib/goals-helper";
 
 function CreateGoalScreen() {
   const [title, setTitle] = useState("");
+  const [completionDate, setCompletionDate] = useState("");
+
+  const navigation = useNavigation();
+
+  const submit = async () => {
+    if (title !== "") {
+      const goalId = await createGoal(
+        title,
+        completionDate !== "" ? completionDate : null
+      );
+      navigation.navigate("GoalDetails", { goalId });
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -19,6 +35,25 @@ function CreateGoalScreen() {
           />
         </View>
       </View>
+      <View style={styles.inputWrapper}>
+        <Text style={styles.heading}>Target completion date</Text>
+        <View style={styles.inputContainer}>
+          <DateCard
+            onChange={(val) => {
+              setCompletionDate(val);
+            }}
+            placeholder="Target completion date"
+          />
+        </View>
+      </View>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          submit();
+        }}
+      >
+        <Text style={styles.text}>Create</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -59,6 +94,24 @@ const styles = StyleSheet.create({
     marginLeft: 24,
     marginRight: 24,
     marginBottom: 0,
+  },
+  button: {
+    backgroundColor: "#EAAC30",
+    paddingTop: 20,
+    paddingBottom: 20,
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+
+    alignItems: "center",
+    zIndex: 3,
+  },
+  text: {
+    fontFamily: "Poppins_600SemiBold",
+    fontSize: 18,
+    lineHeight: 32,
+    color: "#fcfcfc",
   },
 });
 export default CreateGoalScreen;

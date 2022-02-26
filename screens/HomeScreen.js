@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import InfoList from "../components/InfoList";
-import { getGoals } from "../lib/goals-helper";
+import { getGoals, deleteAllGoals } from "../lib/goals-helper";
 
 function HomeScreen() {
   const [todoList, setTodoList] = useState([]);
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
   const fetchTodoList = async () => {
     const list = await getGoals();
@@ -15,7 +16,7 @@ function HomeScreen() {
 
   useEffect(() => {
     fetchTodoList();
-  }, []);
+  }, [isFocused]);
 
   return (
     <View style={styles.container}>

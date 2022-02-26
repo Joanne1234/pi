@@ -23,20 +23,24 @@ const getPercentageTasksCompleted = (goal) => {
 };
 
 export const PercentageCompleteText = ({ goal }) => {
+  const percentage =
+    goal?.tasks.length > 0
+      ? Math.round(getPercentageTasksCompleted(goal) * 100)
+      : 0;
   return (
     <View style={styles.line}>
-      <Text style={styles.percentage}>
-        {Math.round(getPercentageTasksCompleted(goal) * 100)}%{" "}
-      </Text>
+      <Text style={styles.percentage}>{percentage}% </Text>
       <Text style={styles.text}>Complete</Text>
     </View>
   );
 };
 
 const InfoCard = ({ goal, progress }) => {
-  const nextTask = getNextTaskInGoal(goal);
-  const completedTaskAmount = getNumberOfTasksCompleted(goal);
-  const percentageTasksCompleted = getPercentageTasksCompleted(goal);
+  const nextTask = goal?.tasks.length > 0 ? getNextTaskInGoal(goal) : null;
+  const completedTaskAmount =
+    goal?.tasks.length > 0 ? getNumberOfTasksCompleted(goal) : 0;
+  const percentageTasksCompleted =
+    goal?.tasks.length > 0 ? getPercentageTasksCompleted(goal) : 0;
 
   return (
     <View style={styles.container}>
