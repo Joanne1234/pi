@@ -32,6 +32,7 @@ function InfoList({ toDoList, expanded, onGoalClick }) {
         data={toDoList}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        //ListFooterComponent={listFooterComponent}
       />
     </View>
   );
@@ -39,8 +40,8 @@ function InfoList({ toDoList, expanded, onGoalClick }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignSelf: "stretch",
+    //flex: 1,
+    alignSelf: 'stretch',
   },
   heading: {
     fontFamily: "Poppins_700Bold",
