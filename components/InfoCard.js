@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderRadius: 24,
     borderColor: '#20232a',
-    padding: 20,
+    padding: 15,
     marginHorizontal: 20,
     marginTop: 10, 
     marginBottom: 20,
@@ -45,35 +45,39 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   heading: {
-    fontFamily: "Poppins_700Bold",
-    fontSize: 36,
-    lineHeight: 48,
+    fontFamily: "Poppins_600SemiBold",
+    fontSize: 18,
+    lineHeight: 32,
     color: "#14142B",
+    paddingBottom: 10,
   },
   subheading: {
     fontFamily: "Poppins_400Regular",
-    fontSize: 24,
-    lineHeight: 32,
+    fontSize: 15,
+    lineHeight: 24,
     color: "#6E7191",
+    paddingBottom: 10,
   },
   bar: {
-    marginVertical: 10,
+    marginVertical: 5,
   }, 
   line: {
     flexDirection: 'row'
   },
   text: {
     fontFamily: "Poppins_600SemiBold",
-    fontSize: 18,
-    lineHeight: 32,
+    fontSize: 13,
+    lineHeight: 22,
     color: "#6E7191",
+    alignSelf: 'center'
   },
   percentage: {
     fontFamily: "Poppins_600SemiBold",
-    fontSize: 20,
+    fontSize: 18,
     lineHeight: 32,
     color: "#14142B",
-    paddingRight: 10
+    paddingRight: 10,
+    alignSelf: 'center'
   }
 });
 export { InfoCardSimple, InfoCardExpanded };
