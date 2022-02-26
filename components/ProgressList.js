@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { RoundedCheckbox } from "react-native-rounded-checkbox";
+//import { RoundedCheckbox } from "react-native-rounded-checkbox";
 import { useEffect, useState } from "react";
 
 function ProgressList({ tasks, completed, setChange }) {
@@ -24,17 +24,7 @@ function ProgressList({ tasks, completed, setChange }) {
     </View>
   );
 }
-
-function CheckBoxItem({ task, setChange }) {
-  const [completed, setCompleted] = useState(task.completed)
-  useEffect(() => {
-    console.log(task.title, " Completed ", completed)
-
-  }, [completed])
-  return (
-    <View style={[styles.cardContainer, {backgroundColor: completed ? "#EAF9DE" : "#FFFFFF"}]}>
-      <View style={styles.checkBox}>
-        <RoundedCheckbox 
+/*<RoundedCheckbox 
           onPress={(checked) => {
             setCompleted(checked)
             setChange(Math.random().toString(36))
@@ -47,7 +37,17 @@ function CheckBoxItem({ task, setChange }) {
           text="✓"
           textStyle={styles.check}
           isChecked={task.completed}
-          outerStyle />
+          outerStyle />*/
+function CheckBoxItem({ task, setChange }) {
+  const [completed, setCompleted] = useState(task.completed)
+  useEffect(() => {
+    console.log(task.title, " Completed ", completed)
+
+  }, [completed])
+  return (
+    <View style={[styles.cardContainer, {backgroundColor: completed ? "#EAF9DE" : "#FFFFFF"}]}>
+      <View style={styles.checkBox}>
+        
       </View>
       <Text style={[styles.text, {
         color: completed ? "#008A00" : "#4E4B66", 
