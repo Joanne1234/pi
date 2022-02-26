@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F7F7FC",
     alignItems: "center",
-    justifyContent: "center",
   },
   heading: {
     fontFamily: "Poppins_700Bold",

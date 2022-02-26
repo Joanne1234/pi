@@ -2,36 +2,27 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { InfoCardExpanded, InfoCardSimple } from "./InfoCard";
 
-function InfoList({ toDoList, expanded, onGoalClick }) {
-  console.log(toDoList);
-  const renderItem = (item) => (
-    <>
-      {!toDoList || toDoList.length == 0 ? (
-        <View style={styles.container}>
-          <Text>Add some goals</Text>
-        </View>
-      ) : (
-        <TouchableOpacity
-          onPress={() => {
-            onGoalClick && onGoalClick(item.id);
-          }}
-        >
-          {expanded ? (
-            <InfoCardExpanded goal={item.item} />
-          ) : (
-            <InfoCardSimple goal={item.item} />
-          )}
-        </TouchableOpacity>
-      )}
-    </>
-  );
-
+function InfoList({ toDoList, expanded, listFooterComponent }) {
+  const renderItem = (item) => {
+    if (expanded) {
+      return (<InfoCardExpanded task={item.item}/>)
+    } 
+    return (<InfoCardSimple task={item.item}/>)
+  }
+  if (!toDoList || toDoList.length == 0) {
+    return (
+      <View style={styles.container}>
+        <Text>Add some goals</Text>
+      </View>
+    )
+  }
   return (
     <View style={styles.container}>
       <FlatList
         data={toDoList}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        //ListFooterComponent={listFooterComponent}
       />
     </View>
   );
@@ -39,8 +30,8 @@ function InfoList({ toDoList, expanded, onGoalClick }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignSelf: "stretch",
+    //flex: 1,
+    alignSelf: 'stretch',
   },
   heading: {
     fontFamily: "Poppins_700Bold",
