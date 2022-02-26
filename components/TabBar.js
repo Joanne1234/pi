@@ -4,7 +4,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import HomeScreen from "../screens/HomeScreen";
 import PetScreen from "../screens/PetScreen";
 import ToDoScreen from "../screens/ToDoScreen";
-import GoalCreateScreen from "../screens/GoalCreateScreen";
+import GoalDetailsScreen from "../screens/GoalDetailsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -126,8 +126,8 @@ function TabBar() {
           }}
         />
         <Tab.Screen
-          name="GoalCreate"
-          component={GoalCreateScreen}
+          name="GoalDetails"
+          component={GoalDetailsScreen}
           options={{
             tabBarButton: () => null,
             tabBarStyle: {

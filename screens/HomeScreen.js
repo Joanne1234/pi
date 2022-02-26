@@ -1,11 +1,19 @@
+import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, View } from "react-native";
 import InfoList from "../components/InfoList";
 
-function HomeScreen({ navigation, toDoList }) {
+function HomeScreen({ toDoList }) {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>My Goals</Text>
-      <InfoList expanded={true} toDoList={toDoList || []} />
+      <InfoList
+        expanded={true}
+        toDoList={toDoList || []}
+        onGoalClick={(goalId) =>
+          navigation.navigate("GoalDetails", { goalId: 1 })
+        }
+      />
     </View>
   );
 }
