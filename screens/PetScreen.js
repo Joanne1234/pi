@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   videoWrapper: {
-    backgroundColor: "#1D2A3C",
+    backgroundColor: "#1a2c3d",
     borderBottomLeftRadius: 32,
     borderBottomRightRadius: 32,
   },

@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
+import moment from "moment";
 import InputCard from "../components/InputCard";
 import { PercentageCompleteText } from "../components/InfoCard";
 import { ProgressList, CheckBoxItem } from "../components/ProgressList";
 import { getGoal, addTask } from "../lib/goals-helper";
 
-// get amount of days till date
-const getDaysTillDate = (dateString) => {
-  const today = new Date();
-  const date = new Date(dateString);
-  const timeDiff = Math.abs(date.getTime() - today.getTime());
-  const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
-  return diffDays;
+// use moment to get days till date
+const getDays = (dateString) => {
+  const date = moment(dateString, "YYYY-MM-DD");
+  const now = moment();
+  const duration = moment.duration(date.diff(now));
+  return Math.ceil(duration.asDays());
 };
 
 const GoalDetailsScreen = () => {
@@ -35,7 +35,7 @@ const GoalDetailsScreen = () => {
   }, [route.params.goalId, change]);
 
   const Days = () => {
-    const daysLeft = getDaysTillDate(goal.targetDate);
+    const daysLeft = getDays(goal.targetDate);
     return (
       <Text style={styles.text}>
         {daysLeft > 0

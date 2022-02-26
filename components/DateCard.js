@@ -15,9 +15,7 @@ const DateCard = ({ placeholder, value, onChange }) => {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    const dateString = new Date(date).toDateString();
-
-    const month = new Date(date).getMonth();
+    const month = new Date(date).getMonth() + 1;
     const day = new Date(date).getDate();
     const year = new Date(date).getFullYear();
 
