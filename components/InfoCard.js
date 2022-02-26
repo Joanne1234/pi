@@ -36,19 +36,23 @@ export const PercentageCompleteText = ({ goal }) => {
 };
 
 const InfoCard = ({ goal, progress }) => {
-  const nextTask = goal?.tasks.length > 0 ? getNextTaskInGoal(goal) : null;
+  const nextTask = goal?.tasks?.length > 0 ? getNextTaskInGoal(goal) : null;
   const completedTaskAmount =
-    goal?.tasks.length > 0 ? getNumberOfTasksCompleted(goal) : 0;
+    goal?.tasks?.length > 0 ? getNumberOfTasksCompleted(goal) : 0;
   const percentageTasksCompleted =
-    goal?.tasks.length > 0 ? getPercentageTasksCompleted(goal) : 0;
+    goal?.tasks?.length > 0 ? getPercentageTasksCompleted(goal) : 0;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>{goal.title}</Text>
+      <Text style={styles.heading}>{goal?.title}</Text>
       {!progress ? (
-        <Text style={styles.subheading}>
-          {completedTaskAmount}/{goal.tasks.length} Tasks completed
-        </Text>
+        !goal?.subheading ? (
+          <Text style={styles.subheading}>
+            {completedTaskAmount}/{goal?.tasks?.length} Tasks completed
+          </Text>
+        ) : (
+          <Text style={styles.subheading}>{goal.subheading}</Text>
+        )
       ) : (
         <>
           {nextTask && <Text style={styles.subheading}>{nextTask.title}</Text>}
@@ -75,7 +79,7 @@ const styles = StyleSheet.create({
     borderColor: "#20232a",
     padding: 15,
     marginHorizontal: 24,
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 10,
     alignSelf: "stretch",
   },

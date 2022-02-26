@@ -70,6 +70,7 @@ const TabBar = () => {
           component={PetScreen}
           options={{
             tabBarLabel: "Pet",
+            headerShown: false,
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="paw" color={color} size={size} />
             ),
