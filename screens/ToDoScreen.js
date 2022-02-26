@@ -1,18 +1,17 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { CreateGoalButton } from "../components/Button";
 import InfoList from "../components/InfoList";
 
 function ToDoScreen({ toDoList }) {
   return (
     <View style={styles.container}>
-      <CreateGoalButton style={styles.button}/>
-      <InfoList 
-        style={styles.list} 
-        expanded={false} 
+      <Text style={styles.heading}>To Do List</Text>
+      <InfoList
+        style={styles.list}
+        expanded={false}
         toDoList={toDoList || []}
-        listFooterComponent={<CreateGoalButton style={styles.button}/>}
       />
-      <CreateGoalButton style={styles.button}/>
+      <CreateGoalButton style={styles.button} />
     </View>
   );
 }
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
     //flex: 3
   },
   button: {
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 export default ToDoScreen;
