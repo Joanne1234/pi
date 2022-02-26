@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import InfoList from "../components/InfoList";
 
-function CreateGoalScreen() {
+function GoalDetailsScreen({ toDoList }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Goal Title</Text>
+      <Text style={styles.heading}>My Goals</Text>
       <InfoList expanded={true} toDoList={toDoList || []}/>
     </View>
   );
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
     color: "#14142B",
   },
 });
-export default CreateGoalScreen;
+export default GoalDetailsScreen;

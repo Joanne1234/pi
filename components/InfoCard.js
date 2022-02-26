@@ -1,33 +1,47 @@
 import { StyleSheet, Text, View } from "react-native";
 import * as Progress from 'expo-progress';
+import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 function InfoCardSimple({ task }) {
+  const navigation = useNavigation()
+  const onClick = () => {
+    navigation.navigate("Goal Details", task)
+  }
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>{task?.title || "InfoCard"}</Text>
-      <Text style={styles.subheading}>{task?.completedTasks || 0} / {task?.totalTasks || 6} Tasks completed</Text>
+      <TouchableOpacity onPress={onClick}>
+        <Text style={styles.heading}>{task?.title || "InfoCard"}</Text>
+        <Text style={styles.subheading}>{task?.completedTasks || 0} / {task?.totalTasks || 6} Tasks completed</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 function InfoCardExpanded({ task }) {
   const progress = (task?.completedTasks || 0.5)/(task?.totalTasks || 1)
+  const navigation = useNavigation()
+  const onClick = () => {
+    navigation.navigate("Goal Details", task)
+  }
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>{task?.title || "InfoCard"}</Text>
-      <Text style={styles.subheading}>{task?.description || "Expanded"}</Text>
-      <Progress.Bar 
-        color="#EAAC30" 
-        progress={progress}
-        trackColor="#EFF0F6"
-        borderRadius={6}
-        height={12}
-        style={styles.bar}
-        />
-      <View style={styles.line}>
-      <Text style={styles.percentage}>{progress*100}% </Text>
-      <Text style={styles.text}>Complete</Text>
-      </View>
+      <TouchableOpacity onPress={onClick}>
+        <Text style={styles.heading}>{task?.title || "InfoCard"}</Text>
+        <Text style={styles.subheading}>{task?.description || "Expanded"}</Text>
+        <Progress.Bar 
+          color="#EAAC30" 
+          progress={progress}
+          trackColor="#EFF0F6"
+          borderRadius={6}
+          height={12}
+          style={styles.bar}
+          />
+        <View style={styles.line}>
+        <Text style={styles.percentage}>{progress*100}% </Text>
+        <Text style={styles.text}>Complete</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }
