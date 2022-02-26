@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -5,56 +6,15 @@ import HomeScreen from "../screens/HomeScreen";
 import PetScreen from "../screens/PetScreen";
 import ToDoScreen from "../screens/ToDoScreen";
 import GoalDetailsScreen from "../screens/GoalDetailsScreen";
+import { initMockState } from "../lib/mocks";
 
 const Tab = createBottomTabNavigator();
 
-function TabBar() {
-  const toDoList = [
-    {
-      id: 1,
-      title: "House Work",
-      targetDate: "2022-02-27",
-      tasks: [
-        {
-          id: 1,
-          title: "Vacuum",
-          completed: false,
-        },
-        {
-          id: 2,
-          title: "Wash",
-          completed: false,
-        },
-        {
-          id: 3,
-          title: "Mop",
-          completed: false,
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: "English Report",
-      targetDate: "2022-02-27",
-      tasks: [
-        {
-          id: 1,
-          title: "Introduction",
-          completed: true,
-        },
-        {
-          id: 2,
-          title: "Reading",
-          completed: true,
-        },
-        {
-          id: 3,
-          title: "Writing",
-          completed: false,
-        },
-      ],
-    },
-  ];
+const TabBar = () => {
+  useEffect(() => {
+    initMockState();
+  }, []);
+
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -79,7 +39,7 @@ function TabBar() {
       >
         <Tab.Screen
           name="Home"
-          children={() => <HomeScreen toDoList={toDoList} />}
+          children={() => <HomeScreen />}
           options={{
             tabBarLabel: "Home",
             tabBarIcon: ({ color, size }) => (
@@ -89,7 +49,7 @@ function TabBar() {
         />
         <Tab.Screen
           name="To Do"
-          children={() => <ToDoScreen toDoList={toDoList} />}
+          children={() => <ToDoScreen />}
           options={{
             tabBarLabel: "To Do",
             tabBarIcon: ({ color, size }) => (
@@ -149,6 +109,5 @@ function TabBar() {
       </Tab.Navigator>
     </NavigationContainer>
   );
-}
-
+};
 export default TabBar;

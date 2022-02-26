@@ -13,7 +13,7 @@ function InfoList({ toDoList, expanded, onGoalClick }) {
       ) : (
         <TouchableOpacity
           onPress={() => {
-            onGoalClick && onGoalClick(item.id);
+            onGoalClick && onGoalClick(item.item.id);
           }}
         >
           {expanded ? (

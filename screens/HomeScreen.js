@@ -1,18 +1,29 @@
 import { useNavigation } from "@react-navigation/native";
+import { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import InfoList from "../components/InfoList";
+import { getGoals } from "../lib/goals-helper";
 
-function HomeScreen({ toDoList }) {
+function HomeScreen() {
   const navigation = useNavigation();
+  const [todoList, setTodoList] = useState([]);
+
+  const fetchTodoList = async () => {
+    const list = await getGoals();
+    setTodoList([...list]);
+  };
+
+  useEffect(() => {
+    fetchTodoList();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>My Goals</Text>
       <InfoList
         expanded={true}
-        toDoList={toDoList || []}
-        onGoalClick={(goalId) =>
-          navigation.navigate("GoalDetails", { goalId: 1 })
-        }
+        toDoList={todoList || []}
+        onGoalClick={(goalId) => navigation.navigate("GoalDetails", { goalId })}
       />
     </View>
   );

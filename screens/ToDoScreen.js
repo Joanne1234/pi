@@ -1,11 +1,24 @@
 import { StyleSheet, Text, View } from "react-native";
+import { useState, useEffect } from "react";
 import InfoList from "../components/InfoList";
+import { getGoals } from "../lib/goals-helper";
 
-function ToDoScreen({ toDoList }) {
+function ToDoScreen() {
+  const [todoList, setTodoList] = useState([]);
+
+  const fetchTodoList = async () => {
+    const list = await getGoals();
+    setTodoList([...list]);
+  };
+
+  useEffect(() => {
+    fetchTodoList();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>To Do List</Text>
-      <InfoList expanded={false} toDoList={toDoList || []}/>
+      <InfoList expanded={false} toDoList={todoList || []} />
     </View>
   );
 }
