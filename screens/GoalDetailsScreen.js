@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { useRoute } from "@react-navigation/native";
 import InputCard from "../components/InputCard";
 
-const GoalDetailsScreen = ({ route }) => {
-  const { goalId } = route.params;
+const GoalDetailsScreen = () => {
+  const router = useRoute();
 
   const [taskValue, setTaskValue] = useState("");
   return (
-    <View>
-      <Text>{goalId}</Text>
+    <View style={styles.container}>
+      <Text>Goal Id: {JSON.stringify(router.params.goalId)}</Text>
+
       <View style={styles.footerWrapper}>
         <Text style={styles.heading}>Add task to goal</Text>
         <View style={styles.inputContainer}>
@@ -26,6 +28,9 @@ const GoalDetailsScreen = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   footerWrapper: {
     position: "absolute",
     bottom: 0,
