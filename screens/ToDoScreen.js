@@ -1,11 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { CreateGoalButton } from "../components/Button";
 import InfoList from "../components/InfoList";
-import { useNavigation } from '@react-navigation/native';
 
 function ToDoScreen({ toDoList }) {
-  const navigation = useNavigation();
-  console.log(navigation)
   return (
     <View style={styles.container}>
       <CreateGoalButton style={styles.button}/>
