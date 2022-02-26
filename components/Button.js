@@ -1,15 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useNavigation } from '@react-navigation/native';
 
-function CreateGoalButton() {
-  const navigation = useNavigation();
-  const onClick = () => {
-    navigation.navigate("CreateGoal")
-  }
+function CreateGoalButton({ param }) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={onClick}>
+      <TouchableOpacity style={styles.button}>
         <Text style={styles.heading}>Create Goal</Text>
       </TouchableOpacity>
     </View>
@@ -20,10 +15,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#EAAC30",
     padding: 12,
-    alignSelf: 'stretch',
-    alignItems: 'stretch',
+    alignSelf: "stretch",
+    alignItems: "stretch",
     borderRadius: 24,
-    margin: 5
+    margin: 5,
   },
   heading: {
     fontFamily: "Poppins_600SemiBold",
@@ -32,10 +27,8 @@ const styles = StyleSheet.create({
     color: "#FCFCFC",
   },
   button: {
-    alignSelf: 'center',
-  }
+    alignSelf: "center",
+  },
 });
 
-export {
-  CreateGoalButton
-};
+export { CreateGoalButton };

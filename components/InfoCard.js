@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import * as Progress from "expo-progress";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const getNextTaskInGoal = (goal) => {
@@ -25,18 +25,18 @@ const getPercentageTasksCompleted = (goal) => {
 
 function InfoCardSimple({ goal }) {
   const completedTaskAmount = getNumberOfTasksCompleted(goal);
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const onClick = () => {
-    console.log("onclick info card simple")
-    navigation.navigate("GoalDetails", { goal: goal })
-  }
+    console.log("onclick info card simple");
+    navigation.navigate("GoalDetails", { goal: goal });
+  };
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onClick}>
         <Text style={styles.heading}>{goal.title}</Text>
         <Text style={styles.subheading}>
           {completedTaskAmount}/{goal.tasks.length} Tasks completed
-       </Text>
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -45,28 +45,28 @@ function InfoCardSimple({ goal }) {
 function InfoCardExpanded({ goal }) {
   const nextTask = getNextTaskInGoal(goal);
   const percentageTasksCompleted = getPercentageTasksCompleted(goal);
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const onClick = () => {
-    console.log(goal)
+    console.log(goal);
     navigation.navigate("ToDo", {
-      screen: "GoalDetails", 
-      params: { goal: goal }
-    })
-  }
+      screen: "GoalDetails",
+      params: { goal: goal },
+    });
+  };
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onClick}>
-      <Text style={styles.heading}>{goal.title}</Text>
-      {nextTask && <Text style={styles.subheading}>{nextTask.title}</Text>}
-      <Progress.Bar
-        color="#EAAC30"
-        progress={percentageTasksCompleted}
-        trackColor="#EFF0F6"
-        borderRadius={6}
-        height={12}
-        style={styles.bar}
-      />
-      <PercentageCompleteText goal={goal}/>
+        <Text style={styles.heading}>{goal.title}</Text>
+        {nextTask && <Text style={styles.subheading}>{nextTask.title}</Text>}
+        <Progress.Bar
+          color="#EAAC30"
+          progress={percentageTasksCompleted}
+          trackColor="#EFF0F6"
+          borderRadius={6}
+          height={12}
+          style={styles.bar}
+        />
+        <PercentageCompleteText goal={goal} />
       </TouchableOpacity>
     </View>
   );
@@ -80,7 +80,7 @@ function PercentageCompleteText({ goal }) {
       </Text>
       <Text style={styles.text}>Complete</Text>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -130,4 +130,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 });
-export { InfoCardSimple, InfoCardExpanded, PercentageCompleteText, getNextTaskInGoal, getNumberOfTasksCompleted, getPercentageTasksCompleted };
+export {
+  InfoCardSimple,
+  InfoCardExpanded,
+  PercentageCompleteText,
+  getNextTaskInGoal,
+  getNumberOfTasksCompleted,
+  getPercentageTasksCompleted,
+};
