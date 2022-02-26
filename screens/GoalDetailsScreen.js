@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   footerWrapper: {
     position: "absolute",
-    bottom: 50,
+    bottom: 0,
     left: 0,
     right: 0,
     flex: 1,

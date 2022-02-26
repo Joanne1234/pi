@@ -31,9 +31,9 @@ const TabBar = () => {
             backgroundColor: "#ffffff",
             borderTopWidth: 0,
             elevation: 0,
-            height: 106,
+            height: 56,
             paddingTop: 16,
-            paddingBottom: 66,
+            paddingBottom: 16,
           },
           headerTitleAlign: "center",
           headerLeft: () => <View />,
@@ -78,9 +78,16 @@ const TabBar = () => {
         />
         <Tab.Screen
           name="Profile"
-          component={HomeScreen}
+          component={View}
           options={{
             tabBarLabel: "Profile",
+            headerTitle: "Settings",
+            headerTitleStyle: {
+              fontFamily: "Poppins_700Bold",
+              fontSize: 17,
+              lineHeight: 28,
+              color: "#14142B",
+            },
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
                 name="account"
