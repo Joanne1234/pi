@@ -23,6 +23,20 @@ function TabBar() {
       completedTasks: 0,
       totalTasks: 1
     },
+    {
+      id: 3,
+      title: "English Report",
+      description: "Complete Bibliography",
+      completedTasks: 0,
+      totalTasks: 1
+    },
+    {
+      id: 4,
+      title: "English Report",
+      description: "Complete Bibliography",
+      completedTasks: 0,
+      totalTasks: 1
+    },
   ]
   return (
     <NavigationContainer>

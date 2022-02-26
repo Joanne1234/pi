@@ -3,7 +3,7 @@ import { FlatList } from "react-native-gesture-handler";
 import { InfoCardExpanded, InfoCardSimple } from "./InfoCard";
 
 
-function InfoList({ toDoList, expanded }) {
+function InfoList({ toDoList, expanded, listFooterComponent }) {
   const renderItem = (item) => {
     if (expanded) {
       return (<InfoCardExpanded task={item.item}/>)
@@ -23,6 +23,7 @@ function InfoList({ toDoList, expanded }) {
         data={toDoList}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        //ListFooterComponent={listFooterComponent}
       />
     </View>
   );
@@ -30,7 +31,7 @@ function InfoList({ toDoList, expanded }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    //flex: 1,
     alignSelf: 'stretch',
   },
   heading: {
