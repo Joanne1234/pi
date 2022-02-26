@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import * as Progress from "expo-progress";
+import { LinearProgress } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
@@ -28,7 +28,11 @@ function InfoCardSimple({ goal }) {
   const navigation = useNavigation();
   const onClick = () => {
     console.log("onclick info card simple");
-    navigation.navigate("GoalDetails", { goal: goal });
+    navigation.navigate("Goal Details", { goal: goal });
+    /*navigation.navigate("ToDo", {
+      screen: "GoalDetails", 
+      params: { goal: goal }
+    })*/
   };
   return (
     <View style={styles.container}>
@@ -57,13 +61,14 @@ function InfoCardExpanded({ goal }) {
       <TouchableOpacity onPress={onClick}>
         <Text style={styles.heading}>{goal.title}</Text>
         {nextTask && <Text style={styles.subheading}>{nextTask.title}</Text>}
-        <Progress.Bar
+        <LinearProgress
           color="#EAAC30"
-          progress={percentageTasksCompleted}
+          value={percentageTasksCompleted}
           trackColor="#EFF0F6"
           borderRadius={6}
           height={12}
           style={styles.bar}
+          variant="determinate"
         />
         <PercentageCompleteText goal={goal} />
       </TouchableOpacity>
@@ -89,8 +94,8 @@ const styles = StyleSheet.create({
     borderColor: "#20232a",
     padding: 15,
     marginHorizontal: 20,
-    marginTop: 10,
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom: 10,
     alignSelf: "stretch",
   },
   heading: {
