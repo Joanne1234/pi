@@ -29,10 +29,14 @@ const GoalDetailsScreen = () => {
     navigation.setOptions({ title: currentGoal.title });
   };
 
-  useEffect(() => {
+  const refresh = () => {
     setGoal({});
     fetchGoal();
-  }, [route.params.goalId, change]);
+  };
+
+  useEffect(() => {
+    refresh();
+  }, [route.params.goalId]);
 
   const Days = () => {
     const daysLeft = getDays(goal.targetDate);
@@ -57,13 +61,19 @@ const GoalDetailsScreen = () => {
           </View>
           <ProgressList
             tasks={goal.tasks}
-            completed={true}
-            setChange={setChange}
+            goalId={goal.id}
+            completed={false}
+            setChange={() => {
+              refresh();
+            }}
           />
           <ProgressList
             tasks={goal.tasks}
-            completed={false}
-            setChange={setChange}
+            goalId={goal.id}
+            completed={true}
+            setChange={() => {
+              refresh();
+            }}
           />
           <View style={styles.footerWrapper}>
             <Text style={styles.heading}>Add task to goal</Text>
@@ -78,7 +88,7 @@ const GoalDetailsScreen = () => {
                   if (taskValue !== "") {
                     await addTask(route.params.goalId, taskValue);
                     setTaskValue("");
-                    setChange(change + 1);
+                    refresh();
                   }
                 }}
               />

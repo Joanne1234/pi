@@ -3,16 +3,17 @@ import { FlatList } from "react-native-gesture-handler";
 // import { RoundedCheckbox } from "react-native-rounded-checkbox";
 import { useEffect, useState } from "react";
 import CheckBox from "./CheckBox";
+import { toggleTask } from "../lib/goals-helper";
 //import Checkbox from 'expo-checkbox';
 
-function ProgressList({ tasks, completed, setChange }) {
+function ProgressList({ goalId, tasks, completed, setChange }) {
   console.log(tasks, completed);
   var displayList = tasks.filter(function (task) {
     return task.completed == completed;
   });
   console.log(displayList);
   const renderItem = (item) => (
-    <CheckBoxItem task={item.item} setChange={setChange} />
+    <CheckBoxItem task={item.item} setChange={setChange} goalId={goalId} />
   );
   if (!displayList || displayList.length == 0) {
     return null;
@@ -34,7 +35,7 @@ function ProgressList({ tasks, completed, setChange }) {
   );
 }
 
-function CheckBoxItem({ task, setChange }) {
+function CheckBoxItem({ task, setChange, goalId }) {
   const [completed, setCompleted] = useState(task.completed);
   useEffect(() => {
     console.log(task.title, " Completed ", completed);
@@ -64,7 +65,9 @@ function CheckBoxItem({ task, setChange }) {
         />*/}
         <CheckBox
           checked={task.completed}
-          onChange={() => {
+          onChange={async () => {
+            await toggleTask(goalId, task.id);
+            setChange();
             // updateTask(task.id, !completed);
           }}
         />
