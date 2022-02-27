@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 const CreateGoalButton = () => (
   <View style={styles.container}>
@@ -7,6 +7,16 @@ const CreateGoalButton = () => (
     </View>
   </View>
 );
+
+function CanvasButton({ text, onClick }) {
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.button} onPress={onClick}>
+        <Text style={styles.heading}>{text || ""}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -29,6 +39,14 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: "center",
   },
+  smallContainer: {
+    backgroundColor: "#EAAC30",
+    padding: 12,
+    alignSelf: 'stretch',
+    alignItems: 'stretch',
+    borderRadius: 5,
+    margin: 5
+  }
 });
 
-export { CreateGoalButton };
+export { CreateGoalButton, CanvasButton };

@@ -1053,6 +1053,13 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
+"@benjeau/react-native-draw@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@benjeau/react-native-draw/-/react-native-draw-0.7.0.tgz#50cd3d8b87f7f4957c4ce803a35afb6ca1afa9a2"
+  integrity sha512-HD0V2e6UlyXD/z6ydJzmcLRDe0ftFI3cN+r+Tx5Y1pF+FN6WZ3UBkhvlUYu4VBAwNlJZDbTEFkO0SYgXM51PUQ==
+  dependencies:
+    "@luncheon/simplify-svg-path" "^0.1.4"
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"
@@ -1336,6 +1343,11 @@
   dependencies:
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
+
+"@luncheon/simplify-svg-path@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@luncheon/simplify-svg-path/-/simplify-svg-path-0.1.4.tgz#a456355e8f5bd91f0303a4eafb991e9530b2ca5c"
+  integrity sha512-Vb2qkwUWvS9Y/lu84Sn1gsMMWbcX0umOjjvjYYvdCtlQWAmlEky7XTdiY2ioKc1Gg32AyZW3wMqkp4Dy8I+9yA==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"

@@ -4,10 +4,12 @@ import InputCard from "../components/InputCard";
 import { useNavigation } from "@react-navigation/native";
 import DateCard from "../components/DateCard";
 import { createGoal } from "../lib/goals-helper";
+import CanvasView from "../components/CanvasView";
 
 function CreateGoalScreen() {
   const [title, setTitle] = useState("");
   const [completionDate, setCompletionDate] = useState("");
+  const [image, setImage] = useState(null);
 
   const navigation = useNavigation();
 
@@ -15,7 +17,8 @@ function CreateGoalScreen() {
     if (title !== "") {
       const goalId = await createGoal(
         title,
-        completionDate !== "" ? completionDate : null
+        completionDate !== "" ? completionDate : null,
+        image
       );
       navigation.navigate("GoalDetails", { goalId });
     }
@@ -46,6 +49,7 @@ function CreateGoalScreen() {
           />
         </View>
       </View>
+      <CanvasView setImage={setImage}/>
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
@@ -73,7 +77,7 @@ const styles = StyleSheet.create({
   },
   inputWrapper: {
     width: "100%",
-    marginTop: 24,
+    marginTop: 15,
   },
   inputContainer: {
     backgroundColor: "#FCFCFC",

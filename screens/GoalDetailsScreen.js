@@ -4,8 +4,10 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import moment from "moment";
 import InputCard from "../components/InputCard";
 import { PercentageCompleteText } from "../components/InfoCard";
-import { ProgressList, CheckBoxItem } from "../components/ProgressList";
-import { getGoal, addTask } from "../lib/goals-helper";
+import { ProgressList } from "../components/ProgressList";
+import { getGoal, addTask, deleteAllGoals } from "../lib/goals-helper";
+import { SvgXml } from "react-native-svg";
+import { CanvasButton } from "../components/Button";
 
 // use moment to get days till date
 const getDays = (dateString) => {
@@ -22,11 +24,13 @@ const GoalDetailsScreen = () => {
   const [change, setChange] = useState(0);
 
   const [goal, setGoal] = useState({});
+  const [canvas, setCanvas] = useState(goal.canvas || null);
 
   const fetchGoal = async () => {
     const currentGoal = await getGoal(route.params.goalId);
     setGoal({ ...currentGoal });
     navigation.setOptions({ title: currentGoal.title });
+    setCanvas(currentGoal.canvas);
   };
 
   const refresh = () => {
@@ -36,7 +40,11 @@ const GoalDetailsScreen = () => {
   useEffect(() => {
     setGoal({});
     refresh();
-  }, [route.params.goalId]);
+  }, [route.params.goalId, canvas]);
+
+  const editCanvas = () => {
+    navigation.navigate("EditCanvas", { setCanvas: setCanvas, goalId: goal.id })
+  }
 
   const Days = () => {
     const daysLeft = getDays(goal.targetDate);
@@ -53,11 +61,15 @@ const GoalDetailsScreen = () => {
 
   return (
     <View style={styles.container}>
-      {Object.keys(goal).length > 0 && (
+      {Object.keys(goal).length > 0 ? (
         <>
           <View style={styles.status}>
             <PercentageCompleteText style={styles.percentage} goal={goal} />
             {goal?.targetDate && <Days />}
+          </View>
+          <View style={styles.preview}>
+              <SvgXml xml={canvas} width="100%" height="50%"/>
+              <CanvasButton text={canvas ? "Edit": "Add drawing"} onClick={editCanvas}/>
           </View>
           <ProgressList
             tasks={goal.tasks}
@@ -95,7 +107,20 @@ const GoalDetailsScreen = () => {
             </View>
           </View>
         </>
-      )}
+      ): (<>
+        <View style={[styles.preview, {display: canvas ? "block" : "none"}]}>
+            {canvas && console.log(canvas, ".....")? (
+              <View style={{backgroundColor: "red"}}>
+                <SvgXml xml={goal.canvas} width="100%" height="100%"/>
+                <CanvasButton text="Edit" onClick={editCanvas}/>
+              </View>
+            ) : null}
+            </View>
+          <View style={{display: canvas ? "none" : "block"}}>
+            <CanvasButton text="Add drawing" onClick={editCanvas}/>
+          </View> 
+          </>)
+      }
     </View>
   );
 };
@@ -152,5 +177,9 @@ const styles = StyleSheet.create({
   percentage: {
     alignSelf: "center",
   },
+  preview: {
+    flexDirection: "column",
+    height: "30%",
+  }
 });
 export default GoalDetailsScreen;
