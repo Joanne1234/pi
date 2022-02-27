@@ -30,7 +30,8 @@ function EditCanvasScreen() {
     ref.current.readSignature();
   }
   const updateGoal = async (canvas) => {
-    const newGoal = Object.assign(goal, {canvas: canvas})
+    const newGoal = Object.assign(goal, {canvas: "canvas"})
+    console.log(newGoal, ".......................")
     updateGoal(route.params.goalId, newGoal)
   }
   return (
