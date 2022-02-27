@@ -4,7 +4,7 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import moment from "moment";
 import InputCard from "../components/InputCard";
 import { PercentageCompleteText } from "../components/InfoCard";
-import { ProgressList, CheckBoxItem } from "../components/ProgressList";
+import { ProgressList } from "../components/ProgressList";
 import { getGoal, addTask, updateGoal } from "../lib/goals-helper";
 import { CanvasButton } from "../components/Button";
 
@@ -29,7 +29,6 @@ const GoalDetailsScreen = () => {
     const currentGoal = await getGoal(route.params.goalId);
     setGoal({ ...currentGoal });
     navigation.setOptions({ title: currentGoal.title });
-    //console.log(currentGoal)
   };
 
   const refresh = () => {
@@ -41,12 +40,12 @@ const GoalDetailsScreen = () => {
     refresh();
   }, [route.params.goalId]);
 
-  useEffect(() => {
+ /* useEffect(() => {
     const newGoal = Object.assign(goal, {canvas: canvas})
     console.log(newGoal)
     updateGoal(route.params.goalId, goal)
     setChange(change+1)
-  }, [canvas])
+  }, [canvas])*/
 
   const Days = () => {
     const daysLeft = getDays(goal.targetDate);

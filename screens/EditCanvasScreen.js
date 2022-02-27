@@ -8,7 +8,7 @@ import { getGoal } from "../lib/goals-helper";
 function EditCanvasScreen() {
   const route = useRoute();
   const navigation = useNavigation();
-  const finaliseChange = route.params.setCanvas
+  //const finaliseChange = route.params.setCanvas
   const [goal, setGoal] = useState({});
   const ref = useRef();
 
@@ -29,8 +29,8 @@ function EditCanvasScreen() {
   const handleSignature = () => {
     ref.current.readSignature();
   }
-  const updateGoal = async (canvas) => {
-    const newGoal = Object.assign(goal, {canvas: "canvas"})
+  const updateGoal = (canvas) => {
+    const newGoal = Object.assign(goal, {canvas: canvas})
     console.log(newGoal, ".......................")
     updateGoal(route.params.goalId, newGoal)
   }
