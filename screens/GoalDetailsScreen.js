@@ -30,11 +30,11 @@ const GoalDetailsScreen = () => {
   };
 
   const refresh = () => {
-    setGoal({});
     fetchGoal();
   };
 
   useEffect(() => {
+    setGoal({});
     refresh();
   }, [route.params.goalId]);
 
