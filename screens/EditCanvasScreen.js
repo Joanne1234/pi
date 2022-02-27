@@ -19,7 +19,6 @@ function EditCanvasScreen() {
   };
 
   useEffect(() => {
-    setGoal({});
     fetchGoal();
   }, [route.params.goalId]);
 

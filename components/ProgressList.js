@@ -5,11 +5,9 @@ import CheckBox from "./CheckBox";
 import { toggleTask } from "../lib/goals-helper";
 
 function ProgressList({ goalId, tasks, completed, setChange }) {
-  console.log(tasks, completed);
   var displayList = tasks.filter(function (task) {
     return task.completed == completed;
   });
-  console.log(displayList);
   const renderItem = (item) => (
     <CheckBoxItem task={item.item} setChange={setChange} goalId={goalId} />
   );
