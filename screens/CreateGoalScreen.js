@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Dimensions,
+} from "react-native";
+import RNDraw from "rn-draw";
 import InputCard from "../components/InputCard";
 import { useNavigation } from "@react-navigation/native";
 import DateCard from "../components/DateCard";
@@ -8,6 +15,7 @@ import { createGoal } from "../lib/goals-helper";
 function CreateGoalScreen() {
   const [title, setTitle] = useState("");
   const [completionDate, setCompletionDate] = useState("");
+  const { width } = Dimensions.get("window");
 
   const navigation = useNavigation();
 
@@ -35,6 +43,7 @@ function CreateGoalScreen() {
           />
         </View>
       </View>
+
       <View style={styles.inputWrapper}>
         <Text style={styles.heading}>Target completion date</Text>
         <View style={styles.inputContainer}>
@@ -46,6 +55,21 @@ function CreateGoalScreen() {
           />
         </View>
       </View>
+      <View style={styles.inputWrapper}>
+        <Text style={styles.heading}>Add drawing</Text>
+        <View style={{ ...styles.drawingContainer, width: width - 48 }}>
+          <RNDraw
+            containerStyle={{
+              backgroundColor: "#FCFCFC",
+              width: width - 48,
+              height: 400,
+            }}
+            color="#000000"
+            strokeWidth={2}
+          />
+        </View>
+      </View>
+
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
@@ -85,6 +109,15 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     margin: 16,
     borderRadius: 24,
+  },
+  drawingContainer: {
+    backgroundColor: "#FCFCFC",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 18,
+    margin: 16,
+    borderRadius: 24,
+    height: 400,
   },
   heading: {
     fontFamily: "Poppins_400Regular",
