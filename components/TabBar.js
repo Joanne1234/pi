@@ -9,6 +9,7 @@ import CreateGoalScreen from "../screens/CreateGoalScreen";
 import { initMockState } from "../lib/mocks";
 import ToDoScreen from "../screens/ToDoScreen";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
+import EditCanvasScreen from "../screens/EditCanvasScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -133,7 +134,7 @@ const TabBar = () => {
           })}
         />
         <Tab.Screen
-          name="CrateGoal"
+          name="CreateGoal"
           children={() => <CreateGoalScreen />}
           options={({ navigation }) => ({
             tabBarButton: () => null,
@@ -141,6 +142,42 @@ const TabBar = () => {
               display: "none",
             },
             headerTitle: "Create Goal",
+            headerStyle: {
+              backgroundColor: "#EAAC30",
+              borderBottomWidth: 0,
+              elevation: 0,
+            },
+            headerTitleStyle: {
+              fontFamily: "Poppins_700Bold",
+              fontSize: 17,
+              lineHeight: 28,
+              color: "#FCFCFC",
+            },
+            headerRight: (_props) => (
+              <TouchableOpacity
+                style={styles.closeStyles}
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              >
+                <MaterialCommunityIcons
+                  name="close"
+                  size={24}
+                  color="#FCFCFC"
+                />
+              </TouchableOpacity>
+            ),
+          })}
+        />
+        <Tab.Screen
+          name="EditCanvas"
+          children={() => <EditCanvasScreen />}
+          options={({ navigation }) => ({
+            tabBarButton: () => null,
+            tabBarStyle: {
+              display: "none",
+            },
+            headerTitle: "Edit drawing",
             headerStyle: {
               backgroundColor: "#EAAC30",
               borderBottomWidth: 0,

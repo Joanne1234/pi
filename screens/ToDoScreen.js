@@ -30,7 +30,7 @@ function ToDoScreen() {
       <TouchableOpacity
         style={styles.buttonContainer}
         onPress={() => {
-          navigation.navigate("CrateGoal");
+          navigation.navigate("CreateGoal");
         }}
       >
         <CreateGoalButton />
