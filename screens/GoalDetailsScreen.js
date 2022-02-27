@@ -6,6 +6,7 @@ import InputCard from "../components/InputCard";
 import { PercentageCompleteText } from "../components/InfoCard";
 import { ProgressList, CheckBoxItem } from "../components/ProgressList";
 import { getGoal, addTask } from "../lib/goals-helper";
+import { CanvasButton } from "../components/Button";
 
 // use moment to get days till date
 const getDays = (dateString) => {
@@ -20,8 +21,8 @@ const GoalDetailsScreen = () => {
   const navigation = useNavigation();
   const [taskValue, setTaskValue] = useState("");
   const [change, setChange] = useState(0);
-
   const [goal, setGoal] = useState({});
+  const [canvas, setCanvas] = useState(goal.canvas || null)
 
   const fetchGoal = async () => {
     const currentGoal = await getGoal(route.params.goalId);
@@ -32,6 +33,10 @@ const GoalDetailsScreen = () => {
   const refresh = () => {
     fetchGoal();
   };
+
+  const editCanvas = () => {
+    navigation.navigate("EditCanvas", { setCanvas: setCanvas, goalId: goal.id })
+  }
 
   useEffect(() => {
     setGoal({});
@@ -53,11 +58,26 @@ const GoalDetailsScreen = () => {
 
   return (
     <View style={styles.container}>
-      {Object.keys(goal).length > 0 && (
+      {Object.keys(goal).length > 0 ? (
         <>
           <View style={styles.status}>
             <PercentageCompleteText style={styles.percentage} goal={goal} />
             {goal?.targetDate && <Days />}
+          </View>
+          <View style={[styles.preview, {display: canvas ? "block" : "none"}]}>
+            {canvas ? (
+              <View style={{backgroundColor: "green"}}>
+                <Image
+                  resizeMode={"contain"}
+                  style={{ width: "100%", height: "50%" }}
+                  source={{ uri: canvas }}
+                />
+                <CanvasButton text="Edit" onClick={editCanvas}/>
+              </View>
+            ) : null}
+            </View>
+          <View style={{display: canvas ? "none" : "block"}}>
+            <CanvasButton text="Add drawing" onClick={editCanvas}/>
           </View>
           <ProgressList
             tasks={goal.tasks}
@@ -95,7 +115,23 @@ const GoalDetailsScreen = () => {
             </View>
           </View>
         </>
-      )}
+      ) : (<>
+        <View style={[styles.preview, {display: canvas ? "block" : "none"}]}>
+            {canvas ? (
+              <View style={{backgroundColor: "green"}}>
+                <Image
+                  resizeMode={"contain"}
+                  style={{ width: "100%", height: "50%" }}
+                  source={{ uri: canvas }}
+                />
+                <CanvasButton text="Edit" onClick={editCanvas}/>
+              </View>
+            ) : null}
+            </View>
+          <View style={{display: canvas ? "none" : "block"}}>
+            <CanvasButton text="Add drawing" onClick={editCanvas}/>
+          </View>
+      </>)}
     </View>
   );
 };
