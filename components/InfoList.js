@@ -3,7 +3,7 @@ import { FlatList } from "react-native-gesture-handler";
 import InfoCard from "./InfoCard";
 
 function InfoList({ toDoList, expanded, onGoalClick }) {
-  console.log(toDoList);
+  //console.log(toDoList);
   const renderItem = (item) => (
     <>
       {!toDoList || toDoList.length == 0 ? (

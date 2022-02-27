@@ -7,11 +7,12 @@ import { toggleTask } from "../lib/goals-helper";
 //import Checkbox from 'expo-checkbox';
 
 function ProgressList({ goalId, tasks, completed, setChange }) {
-  console.log(tasks, completed);
+  console.log(tasks)
+  console.log(completed);
   var displayList = tasks.filter(function (task) {
     return task.completed == completed;
   });
-  console.log(displayList);
+  //console.log(displayList);
   const renderItem = (item) => (
     <CheckBoxItem task={item.item} setChange={setChange} goalId={goalId} />
   );

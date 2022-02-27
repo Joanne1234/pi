@@ -10,6 +10,7 @@ function EditCanvasScreen() {
   const navigation = useNavigation();
   const [goal, setGoal] = useState({});
   const ref = useRef();
+  const setCanvas = route.params.setCanvas
 
   const fetchGoal = async () => {
     const currentGoal = await getGoal(route.params.goalId);
@@ -24,10 +25,15 @@ function EditCanvasScreen() {
   const handleClear = () => {
     ref.current.clearSignature();
   }
-  const handleSignature = () => {
+  const handleSave = (canvas) => {
     ref.current.readSignature();
   }
+  const onOK = (canvas) => {
+    console.log("onOK", "canvas")
+    setCanvas(canvas)
+  }
   /*const updateGoal = (canvas) => {
+    console.log("updateGoals..")
     const newGoal = Object.assign(goal, {canvas: canvas})
     console.log(newGoal, ".......................")
     updateGoal(route.params.goalId, newGoal)
@@ -37,15 +43,13 @@ function EditCanvasScreen() {
       <View style={styles.canvas}>
         <Signature
           ref={ref}
-          onOK={() => { console.log("OK...") }}
+          onOK={onOK}
           descriptionText={goal?.title}
-          clearText="Clear"
-          confirmText="Save"
           webStyle={`.m-signature-pad--footer {display: none; margin: 0px;}`}
         />
       </View>
       <View style={styles.line}>
-        <CanvasButton text="Save" onClick={handleSignature}/>
+        <CanvasButton text="Save" onClick={handleSave}/>
         <CanvasButton text="Clear" onClick={handleClear} backgroundColor="#6E7191"/>
       </View>
     </View>

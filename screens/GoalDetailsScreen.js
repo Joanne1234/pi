@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import moment from "moment";
 import InputCard from "../components/InputCard";
 import { PercentageCompleteText } from "../components/InfoCard";
-import { ProgressList, CheckBoxItem } from "../components/ProgressList";
-import { getGoal, addTask } from "../lib/goals-helper";
+import { ProgressList } from "../components/ProgressList";
+import { getGoal, addTask, updateGoal } from "../lib/goals-helper";
 import { CanvasButton } from "../components/Button";
 
 // use moment to get days till date
@@ -22,12 +22,13 @@ const GoalDetailsScreen = () => {
   const [taskValue, setTaskValue] = useState("");
   const [change, setChange] = useState(0);
   const [goal, setGoal] = useState({});
-  const [canvas, setCanvas] = useState(goal.canvas || null)
+  const [canvas, setCanvas] = useState(null)
 
   const fetchGoal = async () => {
     const currentGoal = await getGoal(route.params.goalId);
     setGoal({ ...currentGoal });
     navigation.setOptions({ title: currentGoal.title });
+    setCanvas(currentGoal.canvas)
   };
 
   const refresh = () => {
@@ -35,13 +36,20 @@ const GoalDetailsScreen = () => {
   };
 
   const editCanvas = () => {
-    navigation.navigate("EditCanvas", { setCanvas: setCanvas, goalId: goal.id })
+    navigation.navigate("EditCanvas", { goalId: goal.id, setCanvas: setCanvas })
   }
 
   useEffect(() => {
     setGoal({});
     refresh();
   }, [route.params.goalId]);
+
+  useEffect(() => {
+    console.log("Canvas changed")
+    console.log("updateGoals..")
+    const newGoal = Object.assign(goal, {canvas: canvas})
+    updateGoal(route.params.goalId, newGoal)
+  }, [canvas])
 
   const Days = () => {
     const daysLeft = getDays(goal.targetDate);
